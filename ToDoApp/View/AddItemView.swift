@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddItemView: View {
     @State var title: String = ""
-    //@State var description: String = ""
+    // @State var description: String = ""
     @State var isCompleted: Bool = false
     @State var dueDate: Date = .init()
 
@@ -28,7 +28,7 @@ struct AddItemView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
 
-               //Toggle("Status: \(isCompleted ? "Completed" : "Pending")", isOn: $isCompleted)
+                // Toggle("Status: \(isCompleted ? "Completed" : "Pending")", isOn: $isCompleted)
 
                 Toggle(isOn: $isCompleted) {
                     TextView(title: "Status: \(isCompleted ? "Completed" : "Pending")")

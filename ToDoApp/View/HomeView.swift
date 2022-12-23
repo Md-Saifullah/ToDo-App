@@ -2,22 +2,18 @@
 //  HomeView.swift
 //  ToDoApp
 //
-//  Created by Mohammad Saifullah on 21/12/22.
+//  Created by Mohammad Saifullah on 23/12/22.
 //
 
 import SwiftUI
 
 struct HomeView: View {
-    @State var isLoggedIn: Bool = false
     var body: some View {
         ZStack{
-            if isLoggedIn {
-                ListView()
-                    .transition(AnyTransition.opacity.animation(.easeIn))
-            } else {
-                LogInView(isLoggedIn: $isLoggedIn)
-                    .transition(AnyTransition.opacity.animation(.easeIn))
-            }
+            Color(UIColor.systemBackground)
+                .tabItem {
+                    ListView()
+                }
         }
     }
 }

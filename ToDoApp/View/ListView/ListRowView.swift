@@ -10,10 +10,7 @@ import SwiftUI
 struct ListRowView: View {
     var item: ItemModel
     var body: some View {
-        NavigationLink(destination: {
-            EditItemView(item: item)
-            //AddItemView()
-        }, label: {
+        NavigationLink(destination: EditItemView(item: item)) {
             HStack(alignment: .top, spacing: 10) {
                 Image(systemName: item.isCompleted ? "checkmark.circle" : "circle")
                     .resizable()
@@ -36,9 +33,8 @@ struct ListRowView: View {
                 .multilineTextAlignment(.leading)
                 Spacer()
             }
-
-        })
-
+        }
+        //.buttonStyle(BorderedButtonStyle())
         .padding(.top)
         .padding(10)
         .frame(maxWidth: .infinity, alignment: .leading)
