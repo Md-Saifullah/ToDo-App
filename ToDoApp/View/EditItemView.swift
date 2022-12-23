@@ -26,7 +26,7 @@ struct EditItemView: View {
 
                 DatePicker("Set Due Date", selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()), displayedComponents: [.date])
                     .font(.title3)
-                    .fontWeight(.semibold)
+                    //.fontWeight(.semibold)
 
                 // Toggle("Status: \(isCompleted ? "Completed" : "Pending")", isOn: $isCompleted)
 
@@ -60,7 +60,7 @@ struct EditItemView: View {
 
 struct EditItemView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+        NavigationView {
             EditItemView(item: ItemModel(title: "first", dueDate: Date.now, isCompleted: false))
         }
     }

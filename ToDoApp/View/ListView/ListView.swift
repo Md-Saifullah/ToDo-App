@@ -17,20 +17,22 @@ struct ListView: View {
         ItemModel(title: "second", dueDate: Date.now, isCompleted: true)
     ]
     var body: some View {
-        ZStack {
-            NavigationStack {
-                List {
-                    ForEach(items) { item in
-                        ListRowView(item: item)
-                    }
-                    .onDelete(perform: deleteItem)
-                    .onMove(perform: moveItem)
+        NavigationView {
+            List {
+                ForEach(items) { item in
+                    ListRowView(item: item)
+                        //.listRowInsets(.init(top: 4, leading: 10, bottom: 4, trailing: 10))
+                        //.shadow(color: .red, radius: 5)
+                        
                 }
-                .padding(.top)
-                .scrollContentBackground(.hidden)
-                .listStyle(.plain)
-                .navigationTitle("ToDo App 📝")
+                
+                .onDelete(perform: deleteItem)
+                .onMove(perform: moveItem)
             }
+            .listStyle(.plain)
+            .padding(.top)
+            //.scrollContentBackground(.hidden)
+            .navigationTitle("ToDo App 📝")
         }
     }
 
@@ -41,8 +43,10 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            ListView()
+        NavigationView {
+            ZStack {
+                ListView()
+            }
         }
     }
 }

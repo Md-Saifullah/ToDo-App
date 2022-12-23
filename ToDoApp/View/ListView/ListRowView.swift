@@ -42,6 +42,7 @@ struct ListRowView: View {
         .cornerRadius(15)
         .shadow(color: .gray.opacity(0.6), radius: 6, x: 2, y: 2)
         .listRowSeparator(.hidden)
+        //.padding()
     }
 }
 

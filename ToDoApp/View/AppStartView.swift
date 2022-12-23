@@ -13,8 +13,8 @@ struct AppStartView: View {
         ZStack {
             if isLoggedIn {
                 HomeView()
-                    // ListView()
                     .transition(AnyTransition.opacity.animation(.easeIn))
+
             } else {
                 LogInView(isLoggedIn: $isLoggedIn)
                     .transition(AnyTransition.opacity.animation(.easeIn))
