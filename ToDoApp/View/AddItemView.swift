@@ -1,14 +1,13 @@
 //
-//  EditItemView.swift
+//  AddItemView.swift
 //  ToDoApp
 //
-//  Created by Mohammad Saifullah on 22/12/22.
+//  Created by Mohammad Saifullah on 23/12/22.
 //
 
 import SwiftUI
 
-struct EditItemView: View {
-    var item: ItemModel
+struct AddItemView: View {
     @State var title: String = ""
     //@State var description: String = ""
     @State var isCompleted: Bool = false
@@ -18,6 +17,7 @@ struct EditItemView: View {
         ZStack {
             VStack(alignment: .leading, spacing: 30) {
                 MultiSpacer(count: 1)
+
                 TextView(title: "Title:")
                 TextFieldView(bindValue: $title)
 
@@ -28,40 +28,28 @@ struct EditItemView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
 
-                // Toggle("Status: \(isCompleted ? "Completed" : "Pending")", isOn: $isCompleted)
+               //Toggle("Status: \(isCompleted ? "Completed" : "Pending")", isOn: $isCompleted)
 
                 Toggle(isOn: $isCompleted) {
                     TextView(title: "Status: \(isCompleted ? "Completed" : "Pending")")
                 }
-                //MultiSpacer(count: 1)
-                HStack {
-                    CustomButtonView(title: "DELETE", action: deleteItem,background: .red.opacity(0.8))
-                    CustomButtonView(title: "UPDATE", action: updateItem)
-                    
-                }
-                MultiSpacer(count: 2)
+
+                CustomButtonView(title: "SAVE", action: saveItem)
+
+                MultiSpacer(count: 3)
             }
-            .navigationTitle("Edit Item 🖊️")
+            .navigationTitle("Add an Item 🖊️")
             .padding(30)
         }
-        .onAppear(perform: setScreen)
     }
 
-    func setScreen() {
-        title = item.title
-        // description = item.description
-        isCompleted = item.isCompleted
-        dueDate = item.dueDate
-    }
-
-    func updateItem() {}
-    func deleteItem() {}
+    func saveItem() {}
 }
 
-struct EditItemView_Previews: PreviewProvider {
+struct AddItemView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            EditItemView(item: ItemModel(title: "first", dueDate: Date.now, isCompleted: false))
+            AddItemView()
         }
     }
 }

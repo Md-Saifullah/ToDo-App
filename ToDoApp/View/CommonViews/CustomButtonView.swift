@@ -10,12 +10,19 @@ import SwiftUI
 struct CustomButtonView: View {
     var title: String = ""
     var action: () -> Void
+    var background: Color
+    init(title: String, action: @escaping () -> Void, background: Color = Color("ButtonBackground")) {
+        self.title = title
+        self.action = action
+        self.background = background
+    }
+
     var body: some View {
         Button(action: action) {
             TextView(title: title)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, maxHeight: 55)
-                .background(Color("ButtonBackground"))
+                .background(background)
                 .cornerRadius(10)
         }
     }

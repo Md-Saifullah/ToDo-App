@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ListView: View {
     @State var items: [ItemModel] = [
-        ItemModel(title: "first", description: "first description", dueDate: Date.now, isCompleted: true),
-        ItemModel(title: "second", description: "first \n mulasdasdasd\ndsf\ndsfsd\n sdfsdfsd\ndsfsdfsdfsdf\n\n\n\ntiline description", dueDate: Date.now, isCompleted: true),
-        ItemModel(title: "third", description: "second multiline \n description", dueDate: Date.now, isCompleted: false),
-        ItemModel(title: "fourth", description: "first description", dueDate: Date.now, isCompleted: false),
-        ItemModel(title: "fourth", description: "first description", dueDate: Date.now, isCompleted: false),
-        ItemModel(title: "second", description: "first \n mulasdasdasdndsf\ndsfsd sdfsdfsddsfsd fsdfsdf ntiline description", dueDate: Date.now, isCompleted: true)
+        ItemModel(title: "first and also long text for testing purpose", dueDate: Date.now, isCompleted: true),
+        ItemModel(title: "second", dueDate: Date.now, isCompleted: true),
+        ItemModel(title: "third", dueDate: Date.now, isCompleted: false),
+        ItemModel(title: "fourth", dueDate: Date.now, isCompleted: false),
+        ItemModel(title: "fourth", dueDate: Date.now, isCompleted: false),
+        ItemModel(title: "second", dueDate: Date.now, isCompleted: true)
     ]
     var body: some View {
         ZStack {
@@ -26,18 +26,17 @@ struct ListView: View {
                     .onDelete(perform: deleteItem)
                     .onMove(perform: moveItem)
                 }
+                .padding(.top)
                 .scrollContentBackground(.hidden)
                 .listStyle(.plain)
                 .navigationTitle("ToDo App 📝")
             }
         }
     }
-    func deleteItem(at: IndexSet){
-        
-    }
-    func moveItem(from: IndexSet,to: Int){
-        
-    }
+
+    func deleteItem(at: IndexSet) {}
+
+    func moveItem(from: IndexSet, to: Int) {}
 }
 
 struct ListView_Previews: PreviewProvider {

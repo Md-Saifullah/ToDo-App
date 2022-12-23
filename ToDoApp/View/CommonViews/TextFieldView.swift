@@ -9,20 +9,20 @@ import SwiftUI
 
 struct TextFieldView: View {
     var title: String = ""
-    var background: Color
     @Binding var bindValue: String
     var body: some View {
         TextField("\(title)", text: $bindValue)
             .padding()
-            .background(background)
+            .background(Color("Background"))
             .cornerRadius(10)
             .padding(.bottom)
+            .shadow(color: .gray, radius: 4)
     }
 }
 
  struct TextFieldView_Previews: PreviewProvider {
     static var bindedValue:String=""
     static var previews: some View {
-        TextFieldView(background: .secondary.opacity(0.2), bindValue: .constant("hello"))
+        TextFieldView(bindValue: .constant("hello"))
     }
  }

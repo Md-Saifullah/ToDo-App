@@ -12,6 +12,7 @@ struct ListRowView: View {
     var body: some View {
         NavigationLink(destination: {
             EditItemView(item: item)
+            //AddItemView()
         }, label: {
             HStack(alignment: .top, spacing: 10) {
                 Image(systemName: item.isCompleted ? "checkmark.circle" : "circle")
@@ -23,21 +24,23 @@ struct ListRowView: View {
                 VStack(alignment: .leading) {
                     Text(item.title)
                         .font(.title3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, 5)
-                    Text(item.description)
+                    Text("Due Date:\(item.dueDate, style: Text.DateStyle.date)")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                         .font(.footnote)
-                        .frame(maxWidth: .infinity, maxHeight: 55, alignment: .topLeading)
+                    //                    Text(item.description)
+                    //                        .font(.footnote)
+                    //                        .frame(maxWidth: .infinity, maxHeight: 55, alignment: .topLeading)
                 }
                 .multilineTextAlignment(.leading)
                 Spacer()
-                Text("Due Date:\n\(item.dueDate, style: Text.DateStyle.date)")
-                    .frame(maxWidth: 70)
-                    .font(.footnote)
             }
-            
+
         })
+
+        .padding(.top)
         .padding(10)
-        
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color("Background"))
         .cornerRadius(15)
@@ -50,15 +53,15 @@ struct ListRowView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             ListRowView(
-                item: ItemModel(title: "first", description: "first description", dueDate: Date.now, isCompleted: false))
+                item: ItemModel(title: "first and also long text for testing purpose", dueDate: Date.now, isCompleted: false))
             ListRowView(
-                item: ItemModel(title: "second", description: "first \n mulasdasdasd\ndsf\ndsfsd\n sdfsdfsd\ndsfsdfsdfsdf\n\n\n\ntiline description", dueDate: Date.now, isCompleted: true))
+                item: ItemModel(title: "second", dueDate: Date.now, isCompleted: true))
             ListRowView(
-                item: ItemModel(title: "first", description: "first description", dueDate: Date.now, isCompleted: false))
+                item: ItemModel(title: "first", dueDate: Date.now, isCompleted: false))
             ListRowView(
-                item: ItemModel(title: "first", description: "first description", dueDate: Date.now, isCompleted: true))
+                item: ItemModel(title: "first", dueDate: Date.now, isCompleted: true))
             ListRowView(
-                item: ItemModel(title: "second", description: "first \n mulasdasdasd\ndsf\ndsfsd\n sdfsdfsd\ndsfsdfsdfsdf\n\n\n\ntiline description", dueDate: Date.now, isCompleted: true))
+                item: ItemModel(title: "second", dueDate: Date.now, isCompleted: true))
         }
     }
 }

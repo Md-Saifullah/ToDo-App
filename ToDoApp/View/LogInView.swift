@@ -23,11 +23,11 @@ struct LogInView: View {
             VStack(alignment: .leading) {
                 TextView(title: "Name:")
                         
-                TextFieldView(title: "Enter your full name",background: .secondary.opacity(0.2), bindValue: $name)
+                TextFieldView(title: "Enter your full name", bindValue: $name)
                     
                 TextView(title: "Email:")
                         
-                TextFieldView(title: "Enter your email",background: .secondary.opacity(0.2) , bindValue: $email)
+                TextFieldView(title: "Enter your email", bindValue: $email)
                 
                 CustomButtonView(title: "Log In", action: logInAction)
             }
