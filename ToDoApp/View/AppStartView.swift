@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct AppStartView: View {
-    @State var isLoggedIn: Bool = true
+    @EnvironmentObject var userViewModel: UserViewModel
     var body: some View {
         ZStack {
-            if isLoggedIn {
+            if userViewModel.user.isLoggedIn {
                 HomeView()
                     .transition(AnyTransition.opacity.animation(.easeIn))
 
             } else {
-                LogInView(isLoggedIn: $isLoggedIn)
+                LogInView()
                     .transition(AnyTransition.opacity.animation(.easeIn))
             }
         }

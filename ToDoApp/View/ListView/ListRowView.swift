@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListRowView: View {
-    var item: ItemModel
+    var item: Item
     var body: some View {
         NavigationLink(destination: EditItemView(item: item)) {
             HStack(alignment: .top, spacing: 10) {
@@ -23,7 +23,7 @@ struct ListRowView: View {
                         .font(.title3)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, 5)
-                    Text("Due Date:\(item.dueDate, style: Text.DateStyle.date)")
+                    Text("Due Date: \(item.dueDate, style: Text.DateStyle.date)")
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .font(.footnote)
                     //                    Text(item.description)
@@ -50,15 +50,15 @@ struct ListRowView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             ListRowView(
-                item: ItemModel(title: "first and also long text for testing purpose", dueDate: Date.now, isCompleted: false))
+                item: Item(title: "first and also long text for testing purpose", dueDate: Date.now, isCompleted: false))
             ListRowView(
-                item: ItemModel(title: "second", dueDate: Date.now, isCompleted: true))
+                item: Item(title: "second", dueDate: Date.now, isCompleted: true))
             ListRowView(
-                item: ItemModel(title: "first", dueDate: Date.now, isCompleted: false))
+                item: Item(title: "first", dueDate: Date.now, isCompleted: false))
             ListRowView(
-                item: ItemModel(title: "first", dueDate: Date.now, isCompleted: true))
+                item: Item(title: "first", dueDate: Date.now, isCompleted: true))
             ListRowView(
-                item: ItemModel(title: "second", dueDate: Date.now, isCompleted: true))
+                item: Item(title: "second", dueDate: Date.now, isCompleted: true))
         }
     }
 }

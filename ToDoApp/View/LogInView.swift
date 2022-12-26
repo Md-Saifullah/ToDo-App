@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct LogInView: View {
+    @EnvironmentObject var userViewModel: UserViewModel
     @State var name: String = ""
     @State var email: String = ""
+    @State var isLoggedIn: Bool = false
     @State var isEmailValid: Bool = false
     @State var showAlert: Bool = false
-    @Binding var isLoggedIn: Bool
     @State var alertText: String = ""
     var body: some View {
         VStack {
@@ -42,13 +43,13 @@ struct LogInView: View {
             name.isEmpty ? (alertText = "Name Field can not be empty") : (alertText = "Email Field can not be empty")
             showAlert.toggle()
         } else {
-            isLoggedIn.toggle()
+            userViewModel.setUser(User(name: name, email: email, isLoggedIn: !isLoggedIn))
         }
     }
 }
 
 struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
-        LogInView(isLoggedIn: .constant(true))
+        LogInView()
     }
 }

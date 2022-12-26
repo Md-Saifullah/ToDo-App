@@ -8,22 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var tab:Int=0
+    @State private var tab:Int=0
     var body: some View {
         ZStack{
             TabView(selection: $tab) {
-                
                ListView()
-                    .tabItem {Label("ToDo", systemImage: "person")}
+                    .tabItem {Label("ToDo", systemImage: "note.text")}
                     .tag(0)
-                    
-                ProfileView(user: User(name: "Saifullah", email: "saifullah@softzino.com", isLogedIn: true))
+                ProfileView()
                     .tabItem{Label("profile", systemImage: "person")}
                     .tag(1)
             }
-            // MARK: tab to be hide for edit
-            //.hidden()
-            //.accentColor(.gray)
         }
     }
 }

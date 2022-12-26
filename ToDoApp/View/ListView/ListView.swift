@@ -8,42 +8,52 @@
 import SwiftUI
 
 struct ListView: View {
-    @State var items: [ItemModel] = [
-        ItemModel(title: "first and also long text for testing purpose", dueDate: Date.now, isCompleted: true),
-        ItemModel(title: "second", dueDate: Date.now, isCompleted: true),
-        ItemModel(title: "third", dueDate: Date.now, isCompleted: false),
-        ItemModel(title: "fourth", dueDate: Date.now, isCompleted: false),
-        ItemModel(title: "fourth", dueDate: Date.now, isCompleted: false),
-        ItemModel(title: "second", dueDate: Date.now, isCompleted: true)
-    ]
+    @EnvironmentObject var listViewModel: ListViewModel
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    ListRowView(item: item)
-                        //.listRowInsets(.init(top: 4, leading: 10, bottom: 4, trailing: 10))
-                        //.shadow(color: .red, radius: 5)
-                        
+            if listViewModel.items.isEmpty {
+                NoItemView()
+            } else {
+                List {
+                    ForEach(listViewModel.items) { item in
+                        ListRowView(item: item)
+                        // .listRowInsets(.init(top: 4, leading: 10, bottom: 4, trailing: 10))
+                        // .shadow(color: .red, radius: 5)
+                    }
+
+                    .onDelete(perform: deleteItem)
+                    .onMove(perform: moveItem)
                 }
-                
-                .onDelete(perform: deleteItem)
-                .onMove(perform: moveItem)
+                .listStyle(.plain)
+                .padding(.top)
+                // .scrollContentBackground(.hidden)
+                .navigationTitle("ToDo App 📝")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: AddItemView()) {
+                            Image(systemName: "note.text.badge.plus")
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        EditButton()
+                    }
+                }
             }
-            .listStyle(.plain)
-            .padding(.top)
-            //.scrollContentBackground(.hidden)
-            .navigationTitle("ToDo App 📝")
         }
     }
 
-    func deleteItem(at: IndexSet) {}
+    func deleteItem(indexSet: IndexSet) {
+        listViewModel.deleteItem(at: indexSet)
+    }
 
-    func moveItem(from: IndexSet, to: Int) {}
+    func moveItem(indexSet: IndexSet, to: Int) {
+        listViewModel.moveItem(from: indexSet, to: to)
+    }
 }
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 ListView()
             }

@@ -6,10 +6,17 @@
 //
 
 import Foundation
-struct ItemModel: Identifiable {
-    let id: String = UUID().uuidString
+struct Item: Identifiable {
+    let id: String
     let title: String
-    //let description: String
+    // let description: String
     let dueDate: Date
     let isCompleted: Bool
+
+    init(id: String = UUID().uuidString, title: String, dueDate: Date, isCompleted: Bool) {
+        self.id = id
+        self.title = title
+        self.dueDate = dueDate
+        self.isCompleted = isCompleted
+    }
 }

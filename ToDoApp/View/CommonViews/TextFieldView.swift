@@ -12,6 +12,8 @@ struct TextFieldView: View {
     @Binding var bindValue: String
     var body: some View {
         TextField("\(title)", text: $bindValue)
+            .autocorrectionDisabled(true)
+            .textInputAutocapitalization(.never)
             .padding()
             .background(Color("Background"))
             .cornerRadius(10)
