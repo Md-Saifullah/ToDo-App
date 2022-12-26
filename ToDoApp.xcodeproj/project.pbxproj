@@ -142,12 +142,12 @@
 				33BE6DE929532D6700F1C43D /* AppStartView.swift */,
 				33BE6DEB29532DFC00F1C43D /* LogInView.swift */,
 				337EE62F2955A9A3004231C6 /* HomeView.swift */,
+				33B088012959A67B0009DBCD /* NoItemView.swift */,
 				334E82702954354E006CF31E /* ListView */,
 				337EE62D295580E9004231C6 /* ProfileView.swift */,
 				334E827729546D11006CF31E /* EditItemView.swift */,
 				33CC93482955676C0023E7E6 /* AddItemView.swift */,
 				331E9ECB295413D40023DA7D /* CommonViews */,
-				33B088012959A67B0009DBCD /* NoItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

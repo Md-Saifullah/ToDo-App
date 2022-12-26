@@ -12,6 +12,7 @@ struct AddItemView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var title: String = ""
     // @State private var description: String = ""
+    @State private var showAlert: Bool = false
     @State private var isCompleted: Bool = false
     @State private var dueDate: Date = .init()
     @State private var calendarId: Int = 0
@@ -44,14 +45,20 @@ struct AddItemView: View {
                 
                 MultiSpacer(count: 3)
             }
+            .alert("Title can not be empty", isPresented: $showAlert, actions: {})
             .navigationTitle("Add an Item 🖊️")
             .padding(30)
         }
     }
 
     func saveItem() {
-        listViewModel.addItem(Item(title: title, dueDate: dueDate, isCompleted: isCompleted))
-        dismiss()
+        if title.isEmpty {
+            showAlert.toggle()
+        }
+        else{
+            listViewModel.addItem(Item(title: title, dueDate: dueDate, isCompleted: isCompleted))
+            dismiss()
+        }
     }
 }
 

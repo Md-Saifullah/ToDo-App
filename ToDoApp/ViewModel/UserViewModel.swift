@@ -7,23 +7,36 @@
 
 import Foundation
 class UserViewModel: ObservableObject {
-    @Published var user: User{
-        didSet{
+    let userKey = "user_key"
+    @Published var user: User = .init(name: "", email: "", isLoggedIn: false) {
+        didSet {
             saveUser()
         }
     }
-    init(user: User = User(name: "", email: "", isLoggedIn: false)) {
-        self.user = user
+
+    init() {
+        getUser()
     }
 
     func setUser(_ user: User) {
         self.user = user
     }
-    
+
     func clearUser() {
         setUser(User(name: "", email: "", isLoggedIn: false))
     }
-    func saveUser(){
-        
+
+    func getUser() {
+        guard
+            let data = UserDefaults.standard.data(forKey: userKey),
+            let decodedData = try? JSONDecoder().decode(User.self, from: data)
+        else { return }
+        user = decodedData
+    }
+
+    func saveUser() {
+        if let encodedData = try? JSONEncoder().encode(user) {
+            UserDefaults.standard.set(encodedData, forKey: userKey)
+        }
     }
 }

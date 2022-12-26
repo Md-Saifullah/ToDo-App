@@ -13,6 +13,7 @@ struct EditItemView: View {
     @EnvironmentObject var listViewModel: ListViewModel
     @State private var title: String = ""
     // @State private var description: String = ""
+    @State private var showAlert:Bool=false
     @State private var isCompleted: Bool = false
     @State private var dueDate: Date = .init()
     @State private var calendarId: Int = 0
@@ -48,6 +49,7 @@ struct EditItemView: View {
             .navigationTitle("Edit Item 🖊️")
             .padding(30)
         }
+        .alert("Title can not be empty", isPresented: $showAlert, actions: {})
         .onAppear(perform: setScreen)
     }
 
@@ -59,16 +61,18 @@ struct EditItemView: View {
     }
 
     func updateItem() {
-        listViewModel.updateItem(Item(id: item.id, title: title, dueDate: dueDate, isCompleted: isCompleted))
-        dismiss()
+        if title.isEmpty {
+            showAlert.toggle()
+        }else{
+            listViewModel.updateItem(Item(id: item.id, title: title, dueDate: dueDate, isCompleted: isCompleted))
+            dismiss()
+        }
     }
 
     func deleteItem() {
         listViewModel.deleteItem(item)
         dismiss()
     }
-
-    
 }
 
 struct EditItemView_Previews: PreviewProvider {
