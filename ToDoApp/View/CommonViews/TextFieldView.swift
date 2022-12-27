@@ -22,9 +22,9 @@ struct TextFieldView: View {
     }
 }
 
- struct TextFieldView_Previews: PreviewProvider {
-    static var bindedValue:String=""
+struct TextFieldView_Previews: PreviewProvider {
+    static var bindedValue: String = ""
     static var previews: some View {
         TextFieldView(bindValue: .constant("hello"))
     }
- }
+}

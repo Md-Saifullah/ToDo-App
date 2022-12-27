@@ -47,7 +47,9 @@ struct ProfileView: View {
     func logOut() {
         // MARK: clear user Defaults
 
-        userViewModel.clearUser()
+        withAnimation(.easeInOut) {
+            userViewModel.clearUser()
+        }
         listViewModel.clearItems()
     }
 }

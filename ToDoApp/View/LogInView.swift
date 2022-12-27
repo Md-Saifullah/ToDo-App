@@ -43,7 +43,9 @@ struct LogInView: View {
             name.isEmpty ? (alertText = "Name Field can not be empty") : (alertText = "Email Field can not be empty")
             showAlert.toggle()
         } else {
-            userViewModel.setUser(User(name: name, email: email, isLoggedIn: !isLoggedIn))
+            withAnimation(.easeInOut) {
+                userViewModel.setUser(User(name: name, email: email, isLoggedIn: !isLoggedIn))
+            }
         }
     }
 }

@@ -13,40 +13,40 @@ struct NoItemView: View {
     @State var animate: Bool = false
 
     var body: some View {
-            ScrollView {
-                VStack(spacing: 10) {
-                    Text("No Items")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                    Text("Are tou a productive person? I think you should click the add button and add a bunch of items to your todo list!")
-                        .padding(.bottom)
-                    NavigationLink(
-                        destination: AddItemView(),
-                        label: {
-                            Text("Add Something 🥳")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity, minHeight: 55)
-                                .background(animate ? colorFrom : colorTo)
-                                .cornerRadius(30)
-                        }
-                    )
-                    .padding(.horizontal, animate ? 30 : 45)
-                    .shadow(
-                        color: animate ? colorFrom.opacity(0.9) : colorTo.opacity(0.7),
-                        radius: animate ? 30 : 10,
-                        x: 0,
-                        y: animate ? 50 : 30
-                    )
-                    .scaleEffect(animate ? 1.1 : 1.0)
-                    .offset(y: animate ? -7 : 0)
-                }
-                .multilineTextAlignment(.center)
-                .padding(40)
-                .onAppear(perform: addAnimation)
+        ScrollView {
+            VStack(spacing: 10) {
+                Text("No Items")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                Text("Are tou a productive person? I think you should click the add button and add a bunch of items to your todo list!")
+                    .padding(.bottom)
+                NavigationLink(
+                    destination: AddItemView(),
+                    label: {
+                        Text("Add Something 🥳")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, minHeight: 55)
+                            .background(animate ? colorFrom : colorTo)
+                            .cornerRadius(30)
+                    }
+                )
+                .padding(.horizontal, animate ? 30 : 45)
+                .shadow(
+                    color: animate ? colorFrom.opacity(0.9) : colorTo.opacity(0.7),
+                    radius: animate ? 30 : 10,
+                    x: 0,
+                    y: animate ? 50 : 30
+                )
+                .scaleEffect(animate ? 1.1 : 1.0)
+                .offset(y: animate ? -7 : 0)
             }
-            .navigationTitle("ToDo App 📝")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .multilineTextAlignment(.center)
+            .padding(40)
+            .onAppear(perform: addAnimation)
+        }
+        .navigationTitle("ToDo App 📝")
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     func addAnimation() {

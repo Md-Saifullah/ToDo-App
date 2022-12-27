@@ -55,7 +55,7 @@ struct AddItemView: View {
         if title.isEmpty {
             showAlert.toggle()
         }
-        else{
+        else {
             listViewModel.addItem(Item(title: title, dueDate: dueDate, isCompleted: isCompleted))
             dismiss()
         }

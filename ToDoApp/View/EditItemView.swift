@@ -11,9 +11,12 @@ struct EditItemView: View {
     var item: Item
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var listViewModel: ListViewModel
+
     @State private var title: String = ""
     // @State private var description: String = ""
-    @State private var showAlert:Bool=false
+    @State private var alertText: String = ""
+    @State private var titleAlert: Bool = false
+    @State private var deleteAlert: Bool = false
     @State private var isCompleted: Bool = false
     @State private var dueDate: Date = .init()
     @State private var calendarId: Int = 0
@@ -41,16 +44,22 @@ struct EditItemView: View {
                 }
 
                 HStack {
-                    CustomButtonView(title: "DELETE", action: deleteItem, background: .red.opacity(0.8))
+                    CustomButtonView(title: "DELETE", action: deleteButtonPressed, background: .red.opacity(0.8))
                     CustomButtonView(title: "UPDATE", action: updateItem)
                 }
                 MultiSpacer(count: 2)
             }
-            .navigationTitle("Edit Item 🖊️")
+            // .navigationTitle("Edit Item 🖊️")
             .padding(30)
         }
-        .alert("Title can not be empty", isPresented: $showAlert, actions: {})
+        .alert(alertText, isPresented: $deleteAlert, actions: {
+            Button("Cancel", action: {})
+            Button("Ok", action: deleteItem)
+
+        })
+        .alert(alertText, isPresented: $titleAlert, actions: {})
         .onAppear(perform: setScreen)
+        .navigationTitle("Edit Item 🖊️")
     }
 
     func setScreen() {
@@ -62,11 +71,21 @@ struct EditItemView: View {
 
     func updateItem() {
         if title.isEmpty {
-            showAlert.toggle()
-        }else{
-            listViewModel.updateItem(Item(id: item.id, title: title, dueDate: dueDate, isCompleted: isCompleted))
+            alertText = "Title can not be empty"
+            titleAlert.toggle()
+        } else {
+            listViewModel.updateItem(makeItem())
             dismiss()
         }
+    }
+
+    func makeItem() -> Item {
+        return Item(id: item.id, title: title, dueDate: dueDate, isCompleted: isCompleted)
+    }
+
+    func deleteButtonPressed() {
+        alertText = "Do you really want to delete?"
+        deleteAlert.toggle()
     }
 
     func deleteItem() {
