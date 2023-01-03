@@ -1,5 +1,5 @@
 //
-//  LogInView.swift
+//  LogInScreen.swift
 //  ToDoApp
 //
 //  Created by Mohammad Saifullah on 21/12/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LogInView: View {
+struct LogInScreen: View {
     @EnvironmentObject var userViewModel: UserViewModel
     
     @State private var name: String = ""
@@ -52,8 +52,8 @@ struct LogInView: View {
     }
 }
 
-struct LogInView_Previews: PreviewProvider {
+struct LogInScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LogInView()
+        LogInScreen()
     }
 }

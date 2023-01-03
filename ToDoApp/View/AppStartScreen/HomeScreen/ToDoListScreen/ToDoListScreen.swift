@@ -1,5 +1,5 @@
 //
-//  ListView.swift
+//  ToDoListScreen.swift
 //  ToDoApp
 //
 //  Created by Mohammad Saifullah on 21/12/22.
@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct ListView: View {
+struct ToDoListScreen: View {
     @EnvironmentObject var listViewModel: ListViewModel
 
     var body: some View {
         NavigationView {
             if listViewModel.items.isEmpty {
-                NoItemView()
+                EmptyListScreen()
             } else {
                 List {
                     ForEach(listViewModel.items) { item in
-                        ListRowView(item: item)
+                        ToDoListRowView(item: item)
                     }
                     .onDelete(perform: deleteItem)
                     .onMove(perform: moveItem)
@@ -27,7 +27,7 @@ struct ListView: View {
                 .navigationTitle("ToDo App 📝")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: AddItemView()) {
+                        NavigationLink(destination: AddItemScreen()) {
                             Image(systemName: "note.text.badge.plus")
                         }
                     }
@@ -48,9 +48,9 @@ struct ListView: View {
     }
 }
 
-struct ListView_Previews: PreviewProvider {
+struct ToDoListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ListView()
+        ToDoListScreen()
             .environmentObject(ListViewModel())
     }
 }

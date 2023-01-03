@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  HomeScreen.swift
 //  ToDoApp
 //
 //  Created by Mohammad Saifullah on 23/12/22.
@@ -7,26 +7,26 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct HomeScreen: View {
     @State private var tab: Int = 0
 
     var body: some View {
         TabView(selection: $tab) {
-            ListView()
+            ToDoListScreen()
                 .tabItem { Label("ToDo", systemImage: "note.text") }
                 .tag(0)
 
-            ProfileView()
+            ProfileScreen()
                 .tabItem { Label("profile", systemImage: "person") }
                 .tag(1)
         }
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
+struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            HomeView()
+            HomeScreen()
                 .environmentObject(ListViewModel())
                 .environmentObject(UserViewModel())
         }

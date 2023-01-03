@@ -1,5 +1,5 @@
 //
-//  ListRowView.swift
+//  ToDoListRowView.swift
 //  ToDoApp
 //
 //  Created by Mohammad Saifullah on 22/12/22.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct ListRowView: View {
+struct ToDoListRowView: View {
     var item: Item
 
     var body: some View {
-        NavigationLink(destination: EditItemView(item: item)) {
+        NavigationLink(destination: EditItemScreen(item: item)) {
             HStack(alignment: .top, spacing: 10) {
                 Image(systemName: item.isCompleted ? "checkmark.circle" : "circle")
                     .resizable()
@@ -43,18 +43,18 @@ struct ListRowView: View {
     }
 }
 
-struct ListRowView_Previews: PreviewProvider {
+struct ToDoListRowView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ListRowView(
+            ToDoListRowView(
                 item: Item(title: "first and also long text for testing purpose", dueDate: Date.now, isCompleted: false))
-            ListRowView(
+            ToDoListRowView(
                 item: Item(title: "second", dueDate: Date.now, isCompleted: true))
-            ListRowView(
+            ToDoListRowView(
                 item: Item(title: "first", dueDate: Date.now, isCompleted: false))
-            ListRowView(
+            ToDoListRowView(
                 item: Item(title: "first", dueDate: Date.now, isCompleted: true))
-            ListRowView(
+            ToDoListRowView(
                 item: Item(title: "second", dueDate: Date.now, isCompleted: true))
         }
     }

@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  AppStartScreen.swift
 //  ToDoApp
 //
 //  Created by Mohammad Saifullah on 21/12/22.
@@ -7,25 +7,25 @@
 
 import SwiftUI
 
-struct AppStartView: View {
+struct AppStartScreen: View {
     @StateObject var listViewModel: ListViewModel = .init()
     @EnvironmentObject var userViewModel: UserViewModel
 
     var body: some View {
         ZStack {
             if userViewModel.user.isLoggedIn {
-                HomeView()
+                HomeScreen()
                     .environmentObject(listViewModel)
             } else {
-                LogInView()
+                LogInScreen()
             }
         }
     }
 }
 
-struct AppStartView_Previews: PreviewProvider {
+struct AppStartScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AppStartView()
+        AppStartScreen()
             .environmentObject(ListViewModel())
             .environmentObject(UserViewModel())
     }

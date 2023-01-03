@@ -1,5 +1,5 @@
 //
-//  NoItemView.swift
+//  EmptyListScreen.swift
 //  ToDoApp
 //
 //  Created by Mohammad Saifullah on 26/12/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoItemView: View {
+struct EmptyListScreen: View {
     @State private var animate: Bool = false
 
     private let colorFrom: Color = .init(#colorLiteral(red: 0.3, green: 0.4, blue: 0.6, alpha: 1))
@@ -26,7 +26,7 @@ struct NoItemView: View {
                     .padding(.bottom)
 
                 NavigationLink(
-                    destination: AddItemView(),
+                    destination: AddItemScreen(),
                     label: {
                         Text("Add Something 🥳")
                             .font(.headline)
@@ -67,8 +67,8 @@ struct NoItemView: View {
     }
 }
 
-struct NoItemsView_Previews: PreviewProvider {
+struct EmptyListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NoItemView()
+        EmptyListScreen()
     }
 }

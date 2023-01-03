@@ -1,5 +1,5 @@
 //
-//  AddItemView.swift
+//  AddItemScreen.swift
 //  ToDoApp
 //
 //  Created by Mohammad Saifullah on 23/12/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddItemView: View {
+struct AddItemScreen: View {
     @EnvironmentObject var listViewModel: ListViewModel
     @Environment(\.dismiss) private var dismiss
     
@@ -59,10 +59,10 @@ struct AddItemView: View {
     }
 }
 
-struct AddItemView_Previews: PreviewProvider {
+struct AddItemScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AddItemView()
+            AddItemScreen()
         }
     }
 }

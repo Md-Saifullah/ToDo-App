@@ -1,5 +1,5 @@
 //
-//  ProfileView.swift
+//  ProfileScreen.swift
 //  ToDoApp
 //
 //  Created by Mohammad Saifullah on 23/12/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct ProfileScreen: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var listViewModel: ListViewModel
 
@@ -51,9 +51,9 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
+struct ProfileScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileScreen()
             .environmentObject(ListViewModel())
             .environmentObject(UserViewModel())
     }

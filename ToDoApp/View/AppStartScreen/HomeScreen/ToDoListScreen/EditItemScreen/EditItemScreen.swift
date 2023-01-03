@@ -1,5 +1,5 @@
 //
-//  EditItemView.swift
+//  EditItemScreen.swift
 //  ToDoApp
 //
 //  Created by Mohammad Saifullah on 22/12/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditItemView: View {
+struct EditItemScreen: View {
     var item: Item
     
     @Environment(\.dismiss) private var dismiss
@@ -93,13 +93,13 @@ struct EditItemView: View {
     }
 }
 
-struct EditItemView_Previews: PreviewProvider {
+struct EditItemScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            EditItemView(item: Item(title: "first", dueDate: Date.now, isCompleted: false))
+            EditItemScreen(item: Item(title: "first", dueDate: Date.now, isCompleted: false))
         }
         NavigationView {
-            EditItemView(item: Item(title: "second", dueDate: Date.now + 20000000, isCompleted: true))
+            EditItemScreen(item: Item(title: "second", dueDate: Date.now + 20000000, isCompleted: true))
         }
     }
 }

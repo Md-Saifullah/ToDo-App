@@ -49,23 +49,12 @@ class ListViewModel: ObservableObject {
         return index
     }
 
-    // MARK: Storage part
-
     private func getItems() {
         guard
             let data = UserDefaults.standard.data(forKey: itemsKey),
             let decodedData = try? JSONDecoder().decode([Item].self, from: data)
         else { return }
         items = decodedData
-
-        // MARK: remove last
-
-        items.append(contentsOf: [Item(title: "first and also long text for testing purpose", dueDate: Date.now, isCompleted: true),
-                                  Item(title: "second", dueDate: Date.now, isCompleted: true),
-                                  Item(title: "third", dueDate: Date.now, isCompleted: false),
-                                  Item(title: "fourth", dueDate: Date.now, isCompleted: false),
-                                  Item(title: "fourth", dueDate: Date.now, isCompleted: false),
-                                  Item(title: "second", dueDate: Date.now, isCompleted: true)])
     }
 
     private func saveItems() {

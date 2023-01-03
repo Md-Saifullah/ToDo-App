@@ -14,7 +14,7 @@ struct ToDoAppApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                AppStartView()
+                AppStartScreen()
             }
             .environmentObject(userViewModel)
         }
