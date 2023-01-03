@@ -22,40 +22,38 @@ struct EditItemScreen: View {
     @State private var calendarId: Int = 0
 
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading, spacing: 30) {
-                MultiSpacer(count: 1)
+        VStack(alignment: .leading, spacing: 30) {
+            MultiSpacer(count: 1)
 
-                TextView(title: "Title:")
+            TextView(title: "Title:")
 
-                TextFieldView(bindValue: $title, title: "Enter title")
+            TextFieldView(bindValue: $title, title: "Enter title")
 
-                DatePicker(
-                    "Set Due Date",
-                    selection: $dueDate,
-                    in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
-                    displayedComponents: [.date])
-                    .id(calendarId)
-                    .onChange(of: dueDate, perform: { _ in
-                        calendarId += 1
-                    })
-                    .font(.title3)
-                    .fontWeight(.semibold)
+            DatePicker(
+                "Set Due Date",
+                selection: $dueDate,
+                in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
+                displayedComponents: [.date])
+                .id(calendarId)
+                .onChange(of: dueDate, perform: { _ in
+                    calendarId += 1
+                })
+                .font(.title3)
+                .fontWeight(.semibold)
 
-                Toggle(isOn: $isCompleted) {
-                    TextView(title: "Status: \(isCompleted ? "Completed" : "Pending")")
-                }
-
-                HStack {
-                    CustomButtonView(title: "DELETE", background: .red.opacity(0.8), action: deleteButtonPressed)
-
-                    CustomButtonView(title: "UPDATE", action: updateItem)
-                }
-
-                MultiSpacer(count: 2)
+            Toggle(isOn: $isCompleted) {
+                TextView(title: "Status: \(isCompleted ? "Completed" : "Pending")")
             }
-            .padding(30)
+
+            HStack {
+                CustomButtonView(title: "DELETE", background: .red.opacity(0.8), action: deleteButtonPressed)
+
+                CustomButtonView(title: "UPDATE", action: updateItem)
+            }
+
+            MultiSpacer(count: 2)
         }
+        .padding(30)
         .alert(alertText, isPresented: $deleteAlert, actions: {
             Button("Cancel", action: {})
 

@@ -9,15 +9,14 @@ import SwiftUI
 
 struct AppStartScreen: View {
     @EnvironmentObject var userViewModel: UserViewModel
+    @StateObject var listViewModel: ListViewModel = .init()
 
     var body: some View {
-        ZStack {
-            if userViewModel.user.isLoggedIn {
-                HomeScreen()
-
-            } else {
-                LogInScreen()
-            }
+        if userViewModel.user.isLoggedIn {
+            HomeScreen()
+                .environmentObject(listViewModel)
+        } else {
+            LogInScreen()
         }
     }
 }

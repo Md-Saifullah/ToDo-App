@@ -10,15 +10,11 @@ import SwiftUI
 @main
 struct ToDoAppApp: App {
     @StateObject var userViewModel: UserViewModel = .init()
-    @StateObject var listViewModel: ListViewModel = .init()
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                AppStartScreen()
-            }
-            .environmentObject(userViewModel)
-            .environmentObject(listViewModel)
+            AppStartScreen()
+                .environmentObject(userViewModel)
         }
     }
 }

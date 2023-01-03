@@ -18,37 +18,35 @@ struct AddItemScreen: View {
     @State private var calendarId: Int = 0
 
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading, spacing: 30) {
-                MultiSpacer(count: 1)
+        VStack(alignment: .leading, spacing: 30) {
+            MultiSpacer(count: 1)
                 
-                TextView(title: "Title:")
+            TextView(title: "Title:")
                 
-                TextFieldView(bindValue: $title, title: "Enter title")
+            TextFieldView(bindValue: $title, title: "Enter title")
                 
-                DatePicker(
-                    "Set Due Date",
-                    selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
-                    displayedComponents: [.date])
-                    .id(calendarId)
-                    .onChange(of: dueDate, perform: { _ in
-                        calendarId += 1
-                    })
-                    .font(.title3)
-                    .fontWeight(.semibold)
+            DatePicker(
+                "Set Due Date",
+                selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
+                displayedComponents: [.date])
+                .id(calendarId)
+                .onChange(of: dueDate, perform: { _ in
+                    calendarId += 1
+                })
+                .font(.title3)
+                .fontWeight(.semibold)
                 
-                Toggle(isOn: $isCompleted) {
-                    TextView(title: "Status: \(isCompleted ? "Completed" : "Pending")")
-                }
-                
-                CustomButtonView(title: "SAVE", action: saveItem)
-                
-                MultiSpacer(count: 3)
+            Toggle(isOn: $isCompleted) {
+                TextView(title: "Status: \(isCompleted ? "Completed" : "Pending")")
             }
-            .alert("Title can not be empty", isPresented: $showAlert, actions: {})
-            .navigationTitle("Add an Item 🖊️")
-            .padding(30)
+                
+            CustomButtonView(title: "SAVE", action: saveItem)
+                
+            MultiSpacer(count: 3)
         }
+        .alert("Title can not be empty", isPresented: $showAlert, actions: {})
+        .navigationTitle("Add an Item 🖊️")
+        .padding(30)
     }
 
     private func saveItem() {
