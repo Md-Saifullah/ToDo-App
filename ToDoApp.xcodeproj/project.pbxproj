@@ -102,7 +102,9 @@
 		33B29AB22963FC9A004DDC29 /* ProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
-				337EE62D295580E9004231C6 /* ProfileScreen.swift */,
+				33BE6DE829532CA900F1C43D /* ViewModel */,
+				33B29AC329640362004DDC29 /* Model */,
+				33B29AC22964035A004DDC29 /* View */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -110,11 +112,9 @@
 		33B29AB42963FCC7004DDC29 /* ToDoListScreen */ = {
 			isa = PBXGroup;
 			children = (
-				33BE6DED29532E1300F1C43D /* ToDoListScreen.swift */,
-				33B29AB72963FE3A004DDC29 /* EmptyListScreen */,
-				334E82702954354E006CF31E /* ToDoListRowView */,
-				33B29AB82963FE52004DDC29 /* EditItemScreen */,
-				33B29ABB2963FEBA004DDC29 /* AddItemScreen */,
+				33B29ABF296402E4004DDC29 /* View */,
+				33B29AC129640324004DDC29 /* Model */,
+				33B29AC0296402F2004DDC29 /* ViewModel */,
 			);
 			path = ToDoListScreen;
 			sourceTree = "<group>";
@@ -161,28 +161,56 @@
 			path = AddItemScreen;
 			sourceTree = "<group>";
 		};
-		33B29ABC2963FFA4004DDC29 /* ListViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				33B087FB295962A70009DBCD /* ListViewModel.swift */,
-			);
-			path = ListViewModel;
-			sourceTree = "<group>";
-		};
-		33B29ABD2963FFCF004DDC29 /* UserViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				33B087FD295964370009DBCD /* UserViewModel.swift */,
-			);
-			path = UserViewModel;
-			sourceTree = "<group>";
-		};
 		33B29ABE29640007004DDC29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				331E9ECB295413D40023DA7D /* Shared */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		33B29ABF296402E4004DDC29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				33BE6DED29532E1300F1C43D /* ToDoListScreen.swift */,
+				33B29AB72963FE3A004DDC29 /* EmptyListScreen */,
+				334E82702954354E006CF31E /* ToDoListRowView */,
+				33B29AB82963FE52004DDC29 /* EditItemScreen */,
+				33B29ABB2963FEBA004DDC29 /* AddItemScreen */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		33B29AC0296402F2004DDC29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				33B087FB295962A70009DBCD /* ListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		33B29AC129640324004DDC29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				334E827329545147006CF31E /* ItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		33B29AC22964035A004DDC29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				337EE62D295580E9004231C6 /* ProfileScreen.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		33B29AC329640362004DDC29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				334E827529546C3D006CF31E /* UserModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		33BE6DCC29532BCA00F1C43D = {
@@ -206,9 +234,7 @@
 			children = (
 				3316A14B295AB98500E3F7BE /* Info.plist */,
 				33BE6DD829532BCB00F1C43D /* ToDoAppApp.swift */,
-				33BE6DE829532CA900F1C43D /* ViewModel */,
 				33BE6DE729532CA000F1C43D /* View */,
-				33BE6DE629532C8600F1C43D /* Model */,
 				33B29ABE29640007004DDC29 /* Resources */,
 				33BE6DDC29532BCC00F1C43D /* Assets.xcassets */,
 				33BE6DDE29532BCC00F1C43D /* Preview Content */,
@@ -224,15 +250,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		33BE6DE629532C8600F1C43D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				334E827329545147006CF31E /* ItemModel.swift */,
-				334E827529546C3D006CF31E /* UserModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		33BE6DE729532CA000F1C43D /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,8 +262,7 @@
 		33BE6DE829532CA900F1C43D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				33B29ABD2963FFCF004DDC29 /* UserViewModel */,
-				33B29ABC2963FFA4004DDC29 /* ListViewModel */,
+				33B087FD295964370009DBCD /* UserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
