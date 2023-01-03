@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ListRowView: View {
     var item: Item
+
     var body: some View {
         NavigationLink(destination: EditItemView(item: item)) {
             HStack(alignment: .top, spacing: 10) {
@@ -23,12 +24,10 @@ struct ListRowView: View {
                         .font(.title3)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, 5)
+
                     Text("Due Date: \(item.dueDate, style: Text.DateStyle.date)")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
                         .font(.footnote)
-                    //                    Text(item.description)
-                    //                        .font(.footnote)
-                    //                        .frame(maxWidth: .infinity, maxHeight: 55, alignment: .topLeading)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .multilineTextAlignment(.leading)
                 Spacer()
@@ -39,7 +38,7 @@ struct ListRowView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color("Background"))
         .cornerRadius(15)
-        .shadow(color: .gray.opacity(0.6), radius: 6, x: 2, y: 2)
+        .shadow(color: .gray.opacity(0.6), radius: 6)
         .listRowSeparator(.hidden)
     }
 }

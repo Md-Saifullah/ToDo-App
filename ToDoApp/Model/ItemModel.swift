@@ -6,10 +6,10 @@
 //
 
 import Foundation
+
 struct Item: Identifiable, Codable {
     let id: String
     let title: String
-    // let description: String
     let dueDate: Date
     let isCompleted: Bool
 

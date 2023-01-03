@@ -10,8 +10,8 @@ import SwiftUI
 struct AddItemView: View {
     @EnvironmentObject var listViewModel: ListViewModel
     @Environment(\.dismiss) private var dismiss
+    
     @State private var title: String = ""
-    // @State private var description: String = ""
     @State private var showAlert: Bool = false
     @State private var isCompleted: Bool = false
     @State private var dueDate: Date = .init()
@@ -23,17 +23,14 @@ struct AddItemView: View {
                 MultiSpacer(count: 1)
                 
                 TextView(title: "Title:")
-                TextFieldView(title: "Enter title", bindValue: $title)
                 
-                //                TextView(title: "Description:")
-                //                TextEditorView(bindValue: $description)
+                TextFieldView(bindValue: $title, title: "Enter title")
                 
                 DatePicker("Set Due Date", selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()), displayedComponents: [.date])
                     .id(calendarId)
                     .onChange(of: dueDate, perform: { _ in
                         calendarId += 1
                     })
-                
                     .font(.title3)
                     .fontWeight(.semibold)
                 
@@ -51,7 +48,7 @@ struct AddItemView: View {
         }
     }
 
-    func saveItem() {
+    private func saveItem() {
         if title.isEmpty {
             showAlert.toggle()
         }

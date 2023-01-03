@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct TextFieldView: View {
-    var title: String = ""
     @Binding var bindValue: String
+    
+    var title: String = ""
+    
     var body: some View {
         TextField("\(title)", text: $bindValue)
             .autocorrectionDisabled(true)
@@ -23,7 +25,6 @@ struct TextFieldView: View {
 }
 
 struct TextFieldView_Previews: PreviewProvider {
-    static var bindedValue: String = ""
     static var previews: some View {
         TextFieldView(bindValue: .constant("hello"))
     }

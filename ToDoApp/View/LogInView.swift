@@ -9,12 +9,14 @@ import SwiftUI
 
 struct LogInView: View {
     @EnvironmentObject var userViewModel: UserViewModel
-    @State var name: String = ""
-    @State var email: String = ""
-    @State var isLoggedIn: Bool = false
-    @State var isEmailValid: Bool = false
-    @State var showAlert: Bool = false
-    @State var alertText: String = ""
+    
+    @State private var name: String = ""
+    @State private var email: String = ""
+    @State private var isLoggedIn: Bool = false
+    @State private var isEmailValid: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var alertText: String = ""
+    
     var body: some View {
         VStack {
             Spacer()
@@ -24,11 +26,11 @@ struct LogInView: View {
             VStack(alignment: .leading) {
                 TextView(title: "Name:")
                         
-                TextFieldView(title: "Enter your full name", bindValue: $name)
+                TextFieldView(bindValue: $name, title: "Enter your full name")
                     
                 TextView(title: "Email:")
                         
-                TextFieldView(title: "Enter your email", bindValue: $email)
+                TextFieldView(bindValue: $email, title: "Enter your email")
                 
                 CustomButtonView(title: "Log In", action: logInAction)
             }
@@ -38,7 +40,7 @@ struct LogInView: View {
         .padding(30)
     }
     
-    func logInAction() {
+    private func logInAction() {
         if name.isEmpty || email.isEmpty {
             name.isEmpty ? (alertText = "Name Field can not be empty") : (alertText = "Email Field can not be empty")
             showAlert.toggle()

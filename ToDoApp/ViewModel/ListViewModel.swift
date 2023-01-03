@@ -14,7 +14,7 @@ class ListViewModel: ObservableObject {
         }
     }
 
-    let itemsKey: String = "items"
+    private let itemsKey: String = "items"
 
     init() {
         getItems()
@@ -44,31 +44,31 @@ class ListViewModel: ObservableObject {
         items = []
     }
 
-    func getIndex(of item: Item) -> Int {
+    private func getIndex(of item: Item) -> Int {
         guard let index = items.firstIndex(where: { $0.id == item.id }) else { return 0 }
         return index
     }
 
     // MARK: Storage part
 
-    func getItems() {
-        print("getItem")
+    private func getItems() {
         guard
             let data = UserDefaults.standard.data(forKey: itemsKey),
             let decodedData = try? JSONDecoder().decode([Item].self, from: data)
         else { return }
         items = decodedData
 
-//        items.append(contentsOf: [Item(title: "first and also long text for testing purpose", dueDate: Date.now, isCompleted: true),
-//                                  Item(title: "second", dueDate: Date.now, isCompleted: true),
-//                                  Item(title: "third", dueDate: Date.now, isCompleted: false),
-//                                  Item(title: "fourth", dueDate: Date.now, isCompleted: false),
-//                                  Item(title: "fourth", dueDate: Date.now, isCompleted: false),
-//                                  Item(title: "second", dueDate: Date.now, isCompleted: true)])
+        // MARK: remove last
+
+        items.append(contentsOf: [Item(title: "first and also long text for testing purpose", dueDate: Date.now, isCompleted: true),
+                                  Item(title: "second", dueDate: Date.now, isCompleted: true),
+                                  Item(title: "third", dueDate: Date.now, isCompleted: false),
+                                  Item(title: "fourth", dueDate: Date.now, isCompleted: false),
+                                  Item(title: "fourth", dueDate: Date.now, isCompleted: false),
+                                  Item(title: "second", dueDate: Date.now, isCompleted: true)])
     }
 
-    func saveItems() {
-        print("savedItem")
+    private func saveItems() {
         if let encodedData = try? JSONEncoder().encode(items) {
             UserDefaults.standard.set(encodedData, forKey: itemsKey)
         }

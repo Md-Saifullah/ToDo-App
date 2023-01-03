@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct CustomButtonView: View {
-    var title: String = ""
-    var action: () -> Void
-    var background: Color
-    init(title: String, action: @escaping () -> Void, background: Color = Color("ButtonBackground")) {
+    private var title: String
+    private var action: () -> Void
+    private var background: Color
+
+    init(title: String = "Button", action: @escaping () -> Void = {}, background: Color = Color("ButtonBackground")) {
         self.title = title
         self.action = action
         self.background = background
@@ -28,8 +29,8 @@ struct CustomButtonView: View {
     }
 }
 
-// struct CustomButtonView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CustomButtonView()
-//    }
-// }
+struct CustomButtonView_Previews: PreviewProvider {
+    static var previews: some View {
+        CustomButtonView(title: "CustomButton", action: {})
+    }
+}

@@ -14,11 +14,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // MultiSpacer(count: 2)
                 Spacer()
-
-//                TextView(title: "Profile:", fontSize: .largeTitle, fontWeight: .semibold)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
 
                 RoundedRectangle(cornerRadius: 20)
                     .fill(.background)
@@ -27,8 +23,11 @@ struct ProfileView: View {
                     .overlay {
                         VStack(alignment: .leading, spacing: 30) {
                             TextView(title: "Name:  \(userViewModel.user.name)", fontSize: .title)
+
                             TextView(title: "Email:  \(userViewModel.user.email)", fontSize: .headline)
+
                             TextView(title: "ToDo Count:  \(listViewModel.items.count)", fontSize: .headline)
+
                             Spacer()
                         }
                         .padding(30)
@@ -44,9 +43,7 @@ struct ProfileView: View {
         }
     }
 
-    func logOut() {
-        // MARK: clear user Defaults
-
+    private func logOut() {
         withAnimation(.easeInOut) {
             userViewModel.clearUser()
         }
@@ -56,8 +53,8 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            ProfileView()
-        }
+        ProfileView()
+            .environmentObject(ListViewModel())
+            .environmentObject(UserViewModel())
     }
 }

@@ -8,18 +8,23 @@
 import SwiftUI
 
 struct NoItemView: View {
-    let colorFrom: Color = .init(#colorLiteral(red: 0.3, green: 0.4, blue: 0.6, alpha: 1))
-    let colorTo: Color = .init(#colorLiteral(red: 0.08707077056, green: 0.4981409311, blue: 0.7414988875, alpha: 1))
-    @State var animate: Bool = false
+    @State private var animate: Bool = false
+
+    private let colorFrom: Color = .init(#colorLiteral(red: 0.3, green: 0.4, blue: 0.6, alpha: 1))
+    private let colorTo: Color = .init(#colorLiteral(red: 0.08707077056, green: 0.4981409311, blue: 0.7414988875, alpha: 1))
 
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
-                Text("No Items")
-                    .font(.title)
-                    .fontWeight(.semibold)
-                Text("Are tou a productive person? I think you should click the add button and add a bunch of items to your todo list!")
+                TextView(
+                    title: "No Items",
+                    fontSize: .title,
+                    fontWeight: .semibold
+                )
+
+                Text("Are you a productive person? I think you should click the add button and add a bunch of items to your todo list!")
                     .padding(.bottom)
+
                 NavigationLink(
                     destination: AddItemView(),
                     label: {
@@ -49,7 +54,7 @@ struct NoItemView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    func addAnimation() {
+    private func addAnimation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             withAnimation(
                 Animation

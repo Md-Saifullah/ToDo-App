@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct TextView: View {
-    var title: String
-    var fontSize: Font
-    var fontWeight: Font.Weight
+    private var title: String
+    private var fontSize: Font
+    private var fontWeight: Font.Weight
+
     init(title: String = "", fontSize: Font = .title3, fontWeight: Font.Weight = .semibold) {
         self.title = title
         self.fontSize = fontSize
@@ -26,6 +27,6 @@ struct TextView: View {
 
 struct TextView_Previews: PreviewProvider {
     static var previews: some View {
-        TextView(title: "asdfgh")
+        TextView(title: "General TextView")
     }
 }

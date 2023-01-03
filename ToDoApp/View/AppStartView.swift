@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct AppStartView: View {
+    @StateObject var listViewModel: ListViewModel = .init()
     @EnvironmentObject var userViewModel: UserViewModel
+
     var body: some View {
         ZStack {
             if userViewModel.user.isLoggedIn {
                 HomeView()
-                // .transition(AnyTransition.opacity.animation(.easeIn))
-
+                    .environmentObject(listViewModel)
             } else {
                 LogInView()
-                // .transition(AnyTransition.opacity.animation(.easeIn))
             }
         }
     }
@@ -26,5 +26,7 @@ struct AppStartView: View {
 struct AppStartView_Previews: PreviewProvider {
     static var previews: some View {
         AppStartView()
+            .environmentObject(ListViewModel())
+            .environmentObject(UserViewModel())
     }
 }

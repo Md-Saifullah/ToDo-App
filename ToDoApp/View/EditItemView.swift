@@ -9,11 +9,11 @@ import SwiftUI
 
 struct EditItemView: View {
     var item: Item
+    
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var listViewModel: ListViewModel
 
     @State private var title: String = ""
-    // @State private var description: String = ""
     @State private var alertText: String = ""
     @State private var titleAlert: Bool = false
     @State private var deleteAlert: Bool = false
@@ -25,11 +25,10 @@ struct EditItemView: View {
         ZStack {
             VStack(alignment: .leading, spacing: 30) {
                 MultiSpacer(count: 1)
-                TextView(title: "Title:")
-                TextFieldView(title: "Enter title", bindValue: $title)
 
-//                TextView(title: "Description:")
-//                TextEditorView(bindValue: $description)
+                TextView(title: "Title:")
+
+                TextFieldView(bindValue: $title, title: "Enter title")
 
                 DatePicker("Set Due Date", selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()), displayedComponents: [.date])
                     .id(calendarId)
@@ -45,31 +44,31 @@ struct EditItemView: View {
 
                 HStack {
                     CustomButtonView(title: "DELETE", action: deleteButtonPressed, background: .red.opacity(0.8))
+
                     CustomButtonView(title: "UPDATE", action: updateItem)
                 }
+
                 MultiSpacer(count: 2)
             }
-            // .navigationTitle("Edit Item 🖊️")
             .padding(30)
         }
         .alert(alertText, isPresented: $deleteAlert, actions: {
             Button("Cancel", action: {})
-            Button("Ok", action: deleteItem)
 
+            Button("Ok", action: deleteItem)
         })
         .alert(alertText, isPresented: $titleAlert, actions: {})
         .onAppear(perform: setScreen)
         .navigationTitle("Edit Item 🖊️")
     }
 
-    func setScreen() {
+    private func setScreen() {
         title = item.title
-        // description = item.description
         isCompleted = item.isCompleted
         dueDate = item.dueDate
     }
 
-    func updateItem() {
+    private func updateItem() {
         if title.isEmpty {
             alertText = "Title can not be empty"
             titleAlert.toggle()
@@ -79,16 +78,16 @@ struct EditItemView: View {
         }
     }
 
-    func makeItem() -> Item {
+    private func makeItem() -> Item {
         return Item(id: item.id, title: title, dueDate: dueDate, isCompleted: isCompleted)
     }
 
-    func deleteButtonPressed() {
+    private func deleteButtonPressed() {
         alertText = "Do you really want to delete?"
         deleteAlert.toggle()
     }
 
-    func deleteItem() {
+    private func deleteItem() {
         listViewModel.deleteItem(item)
         dismiss()
     }
@@ -98,6 +97,9 @@ struct EditItemView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             EditItemView(item: Item(title: "first", dueDate: Date.now, isCompleted: false))
+        }
+        NavigationView {
+            EditItemView(item: Item(title: "second", dueDate: Date.now + 20000000, isCompleted: true))
         }
     }
 }
