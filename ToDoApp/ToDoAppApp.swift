@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct ToDoAppApp: App {
     @StateObject var userViewModel: UserViewModel = .init()
+    @StateObject var listViewModel: ListViewModel = .init()
 
     var body: some Scene {
         WindowGroup {
@@ -17,6 +18,7 @@ struct ToDoAppApp: App {
                 AppStartScreen()
             }
             .environmentObject(userViewModel)
+            .environmentObject(listViewModel)
         }
     }
 }

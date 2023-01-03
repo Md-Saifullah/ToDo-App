@@ -12,7 +12,7 @@ struct CustomButtonView: View {
     private var action: () -> Void
     private var background: Color
 
-    init(title: String = "Button", action: @escaping () -> Void = {}, background: Color = Color("ButtonBackground")) {
+    init(title: String = "Button", background: Color = Color("ButtonBackground"), action: @escaping () -> Void = {}) {
         self.title = title
         self.action = action
         self.background = background

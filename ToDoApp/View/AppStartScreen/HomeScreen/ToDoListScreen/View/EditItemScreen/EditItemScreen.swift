@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditItemScreen: View {
     var item: Item
-    
+
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var listViewModel: ListViewModel
 
@@ -30,7 +30,11 @@ struct EditItemScreen: View {
 
                 TextFieldView(bindValue: $title, title: "Enter title")
 
-                DatePicker("Set Due Date", selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()), displayedComponents: [.date])
+                DatePicker(
+                    "Set Due Date",
+                    selection: $dueDate,
+                    in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
+                    displayedComponents: [.date])
                     .id(calendarId)
                     .onChange(of: dueDate, perform: { _ in
                         calendarId += 1
@@ -43,7 +47,7 @@ struct EditItemScreen: View {
                 }
 
                 HStack {
-                    CustomButtonView(title: "DELETE", action: deleteButtonPressed, background: .red.opacity(0.8))
+                    CustomButtonView(title: "DELETE", background: .red.opacity(0.8), action: deleteButtonPressed)
 
                     CustomButtonView(title: "UPDATE", action: updateItem)
                 }

@@ -26,7 +26,10 @@ struct AddItemScreen: View {
                 
                 TextFieldView(bindValue: $title, title: "Enter title")
                 
-                DatePicker("Set Due Date", selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()), displayedComponents: [.date])
+                DatePicker(
+                    "Set Due Date",
+                    selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
+                    displayedComponents: [.date])
                     .id(calendarId)
                     .onChange(of: dueDate, perform: { _ in
                         calendarId += 1
