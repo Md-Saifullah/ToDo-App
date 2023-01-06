@@ -8,7 +8,9 @@
 import Foundation
 
 struct User: Codable {
+    let id: Int
     let name: String
     let email: String
-    let isLoggedIn: Bool
+    let gender: String
+    let status: String
 }

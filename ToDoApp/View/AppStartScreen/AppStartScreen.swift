@@ -9,14 +9,16 @@ import SwiftUI
 
 struct AppStartScreen: View {
     @EnvironmentObject var userViewModel: UserViewModel
-    @StateObject var listViewModel: ListViewModel = .init()
-
+    
     var body: some View {
-        if userViewModel.user.isLoggedIn {
-            HomeScreen()
-                .environmentObject(listViewModel)
+        if userViewModel.user.status == "active" {
+            withAnimation(.easeInOut) {
+                HomeScreen()
+            }
         } else {
-            LogInScreen()
+            withAnimation(.easeInOut) {
+                LogInScreen()
+            }
         }
     }
 }
@@ -24,7 +26,6 @@ struct AppStartScreen: View {
 struct AppStartScreen_Previews: PreviewProvider {
     static var previews: some View {
         AppStartScreen()
-            .environmentObject(ListViewModel())
             .environmentObject(UserViewModel())
     }
 }

@@ -14,6 +14,7 @@ class ListViewModel: ObservableObject {
         }
     }
 
+    static var fromNetwork: Bool = false
     private let itemsKey: String = "items"
 
     init() {
@@ -50,11 +51,17 @@ class ListViewModel: ObservableObject {
     }
 
     private func getItems() {
-        guard
-            let data = UserDefaults.standard.data(forKey: itemsKey),
-            let decodedData = try? JSONDecoder().decode([Item].self, from: data)
-        else { return }
-        items = decodedData
+        if ListViewModel.fromNetwork {
+            print("from network")
+        }
+        else {
+            print("not from network")
+            guard
+                let data = UserDefaults.standard.data(forKey: itemsKey),
+                let decodedData = try? JSONDecoder().decode([Item].self, from: data)
+            else { return }
+            items = decodedData
+        }
     }
 
     private func saveItems() {

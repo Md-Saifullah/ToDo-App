@@ -17,6 +17,7 @@
 		334E827429545147006CF31E /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334E827329545147006CF31E /* ItemModel.swift */; };
 		334E827629546C3D006CF31E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334E827529546C3D006CF31E /* UserModel.swift */; };
 		334E827829546D11006CF31E /* EditItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334E827729546D11006CF31E /* EditItemScreen.swift */; };
+		337680ED2967F65100CBE272 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337680EC2967F65100CBE272 /* NetworkManager.swift */; };
 		337EE62E295580E9004231C6 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337EE62D295580E9004231C6 /* ProfileScreen.swift */; };
 		337EE6302955A9A3004231C6 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337EE62F2955A9A3004231C6 /* HomeScreen.swift */; };
 		33B087FC295962A70009DBCD /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B087FB295962A70009DBCD /* ListViewModel.swift */; };
@@ -43,6 +44,7 @@
 		334E827329545147006CF31E /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		334E827529546C3D006CF31E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		334E827729546D11006CF31E /* EditItemScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemScreen.swift; sourceTree = "<group>"; };
+		337680EC2967F65100CBE272 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		337EE62D295580E9004231C6 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		337EE62F2955A9A3004231C6 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		33B087FB295962A70009DBCD /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -87,6 +89,14 @@
 				334E827129543561006CF31E /* ToDoListRowView.swift */,
 			);
 			path = ToDoListRowView;
+			sourceTree = "<group>";
+		};
+		337680EB2967F63400CBE272 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				337680EC2967F65100CBE272 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		33B29AB12963FC87004DDC29 /* HomeScreen */ = {
@@ -232,6 +242,7 @@
 		33BE6DD729532BCB00F1C43D /* ToDoApp */ = {
 			isa = PBXGroup;
 			children = (
+				337680EB2967F63400CBE272 /* NetworkManager */,
 				3316A14B295AB98500E3F7BE /* Info.plist */,
 				33BE6DD829532BCB00F1C43D /* ToDoAppApp.swift */,
 				33BE6DE729532CA000F1C43D /* View */,
@@ -350,6 +361,7 @@
 				331E9ECF295414D20023DA7D /* TextFieldView.swift in Sources */,
 				33BE6DEA29532D6700F1C43D /* AppStartScreen.swift in Sources */,
 				334E827229543561006CF31E /* ToDoListRowView.swift in Sources */,
+				337680ED2967F65100CBE272 /* NetworkManager.swift in Sources */,
 				33B087FE295964370009DBCD /* UserViewModel.swift in Sources */,
 				33B088022959A67B0009DBCD /* EmptyListScreen.swift in Sources */,
 				334E827829546D11006CF31E /* EditItemScreen.swift in Sources */,
