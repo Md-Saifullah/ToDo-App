@@ -12,32 +12,40 @@ struct LogInScreen: View {
     
     @State private var name: String = ""
     @State private var email: String = ""
-    @State private var isLoggedIn: Bool = false
-    @State private var isEmailValid: Bool = false
+    @State private var showProgressView: Bool = false
     @State private var showAlert: Bool = false
     @State private var alertText: String = ""
     
     var body: some View {
-        VStack {
-            Spacer()
+        ZStack{
+            VStack {
+                Spacer()
                 
-            LogoAndTitleView()
+                LogoAndTitleView()
+                
+                VStack(alignment: .leading) {
+                    TextView(title: "Name:")
                     
-            VStack(alignment: .leading) {
-                TextView(title: "Name:")
-                        
-                TextFieldView(bindValue: $name, title: "Enter your full name")
+                    TextFieldView(bindValue: $name, title: "Enter your full name")
                     
-                TextView(title: "Email:")
-                        
-                TextFieldView(bindValue: $email, title: "Enter your email")
-                CustomButtonView(title: "Log In", action: logInAction)
-                CustomButtonView(title: "Sign Up", background: .green, action: signUpAction)
+                    TextView(title: "Email:")
+                    
+                    TextFieldView(bindValue: $email, title: "Enter your email")
+                    
+                    CustomButtonView(title: "Log In", action: logInAction)
+                    
+                    CustomButtonView(title: "Sign Up", background: .green, action: signUpAction)
+                }
+                MultiSpacer(count: 3)
             }
-            MultiSpacer(count: 3)
+            .alert("\(alertText)", isPresented: $showAlert, actions: {})
+            .padding(30)
+            if showProgressView {
+                Color.white.opacity(0.2)
+                    .ignoresSafeArea()
+                ProgressView()
+            }
         }
-        .alert("\(alertText)", isPresented: $showAlert, actions: {})
-        .padding(30)
     }
 
     private func signUpAction() {
@@ -49,19 +57,24 @@ struct LogInScreen: View {
                 gender: "male",
                 status: "active")
             
-            if !userViewModel.createUser(user){
-                alertText="User already exists. Please use Log In"
+            if !userViewModel.createUser(user) {
+                alertText = "User already exists. Please use Log In"
                 showAlert.toggle()
             }
         }
     }
     
     private func logInAction() {
+        
         if validateField() {
-            if !userViewModel.getUserBy(email) {
-                alertText = "No user found. Please check Name and Email or Sign Up for new account"
-                showAlert.toggle()
-            }
+            showProgressView.toggle()
+            userViewModel.getUserBy(email, onCompletion: { bool in
+                if !bool {
+                    showProgressView.toggle()
+                    alertText = "No user found. Please check Name and Email or Sign Up for new account"
+                    showAlert.toggle()
+                }
+            })
         }
     }
 

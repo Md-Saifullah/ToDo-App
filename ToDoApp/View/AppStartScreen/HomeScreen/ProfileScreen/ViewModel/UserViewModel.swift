@@ -34,39 +34,20 @@ class UserViewModel: ObservableObject {
         }
     }
 
-    func getUserBy(_ email: String) -> Bool {
-        var ret: Bool=false
+    func getUserBy(_ email: String, onCompletion: @escaping (Bool) -> Void) {
         networkManager.getUserBy(email) { data in
-            if let safeData = data{
-                self.user=safeData
-                print(self.user)
-                ret = true
-                //return true
+            guard let safeData = data else {
+                onCompletion(false)
+                return
             }
-            //self.user = data
-        } // User(id: 0, name: "test", email: "test", gender: "", status: "active") // networkManage.getUserBy(email) //
-        
-//        guard let user = data else {
-//            print("came nil")
-//            return false
-//        }
-//        print("came true")
-//        //setUser(user)
-//        return true
-        print(user)
-        return ret
-        // MARK: - get from network
-
-        // User(id: 0, name: "test", email: "test", gender: "", status: "active")
+            self.setUser(safeData)
+            onCompletion(true)
+            print(self.user)
+        }
     }
 
     func createUser(_ user: User) -> Bool {
-        let user: User? = networkManager.createUser(user) // User(id: 0, name: "test", email: "test", gender: "", status: "active") // nil //
-
-        // MARK: - get from network
-
-        // User(id: 0, name: "test", email: "test", gender: "", status: "active")
-
+        let user: User? = networkManager.createUser(user)
         guard let user = user else {
             return false
         }
@@ -77,9 +58,10 @@ class UserViewModel: ObservableObject {
     func setUser(_ user: User) {
         ListViewModel.fromNetwork = true
         self.user = user
+        self.user.status = "active"
     }
 
     func clearUser() {
-        setUser(User(id: 0, name: "", email: "", gender: "", status: "inactive"))
+        user = User(id: 0, name: "", email: "", gender: "", status: "inactive")
     }
 }

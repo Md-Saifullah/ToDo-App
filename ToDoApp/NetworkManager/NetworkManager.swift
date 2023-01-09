@@ -9,6 +9,7 @@ import Foundation
 struct NetworkManager {
     let prefixUrl = "https://gorest.co.in/public/v2"
     let bearer = "5b12feb3ddfac89a73dfe2e34b948bfdc7c5872c06079e95dbf877032a1321bc"
+
     func getUserBy(_ email: String, onCompletion: @escaping (User?)->Void) {
         let url = URL(string: "\(prefixUrl)/users?email=\(email)")!
         var request = URLRequest(url: url)
@@ -22,7 +23,7 @@ struct NetworkManager {
                         DispatchQueue.main.async {
                             onCompletion(getUser.first)
                         }
-                    } catch{
+                    } catch {
                         print(error)
                     }
                 }
