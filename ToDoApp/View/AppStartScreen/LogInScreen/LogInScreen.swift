@@ -79,7 +79,9 @@ struct LogInScreen: View {
     private func logInAction() {
         if validateField() {
             showProgressView.toggle()
+            
             userViewModel.getUserBy(email) { bool in
+                
                 if !bool {
                     showProgressView.toggle()
                     alertText = "No user found. Please check Name and Email or Sign Up for new account"
