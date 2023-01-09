@@ -15,6 +15,7 @@ class ListViewModel: ObservableObject {
     }
 
     static var fromNetwork: Bool = false
+    private let networkManager = NetworkManager()
     private let itemsKey: String = "items"
 
     init() {

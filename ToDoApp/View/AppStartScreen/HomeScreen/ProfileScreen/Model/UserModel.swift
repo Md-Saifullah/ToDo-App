@@ -14,3 +14,8 @@ struct User: Codable {
     let gender: String
     var status: String
 }
+
+struct ErrorMessage: Codable {
+    let field: String
+    let message:String
+}

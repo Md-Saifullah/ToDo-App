@@ -17,7 +17,7 @@ struct LogInScreen: View {
     @State private var alertText: String = ""
     
     var body: some View {
-        ZStack{
+        ZStack {
             VStack {
                 Spacer()
                 
@@ -50,6 +50,8 @@ struct LogInScreen: View {
 
     private func signUpAction() {
         if validateField() {
+            showProgressView.toggle()
+            
             let user = User(
                 id: Int.random(in: 10000 ... 99999),
                 name: name,
@@ -57,24 +59,33 @@ struct LogInScreen: View {
                 gender: "male",
                 status: "active")
             
-            if !userViewModel.createUser(user) {
-                alertText = "User already exists. Please use Log In"
-                showAlert.toggle()
+            userViewModel.createUser(user) { success, errors in
+                showProgressView.toggle()
+                
+                if !success {
+                    guard let errors = errors else {
+                        alertText = "Failed!\nCheck your network"
+                        showAlert.toggle()
+                        return
+                    }
+                    
+                    alertText = "\(errors.last?.field ?? "Unknown") \(errors.last?.message ?? "Error")"
+                    showAlert.toggle()
+                }
             }
         }
     }
     
     private func logInAction() {
-        
         if validateField() {
             showProgressView.toggle()
-            userViewModel.getUserBy(email, onCompletion: { bool in
+            userViewModel.getUserBy(email) { bool in
                 if !bool {
                     showProgressView.toggle()
                     alertText = "No user found. Please check Name and Email or Sign Up for new account"
                     showAlert.toggle()
                 }
-            })
+            }
         }
     }
 

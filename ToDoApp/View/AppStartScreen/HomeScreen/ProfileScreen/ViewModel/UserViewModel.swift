@@ -7,7 +7,13 @@
 
 import Foundation
 class UserViewModel: ObservableObject {
-    @Published var user: User = .init(id: 0, name: "", email: "", gender: "", status: "inactive") {
+    @Published var user: User = .init(
+        id: 0,
+        name: "",
+        email: "",
+        gender: "",
+        status: "inactive")
+    {
         didSet {
             saveUser()
         }
@@ -36,32 +42,40 @@ class UserViewModel: ObservableObject {
 
     func getUserBy(_ email: String, onCompletion: @escaping (Bool) -> Void) {
         networkManager.getUserBy(email) { data in
-            guard let safeData = data else {
-                onCompletion(false)
-                return
+            if let safeData = data {
+                print("from login \(safeData)")
+                for safeData in safeData {
+                    if safeData.email == email {
+                        self.setUser(safeData)
+                    }
+                }
             }
-            self.setUser(safeData)
-            onCompletion(true)
-            print(self.user)
+            onCompletion(false)
         }
     }
 
-    func createUser(_ user: User) -> Bool {
-        let user: User? = networkManager.createUser(user)
-        guard let user = user else {
-            return false
+    func createUser(_ user: User, onCompletion: @escaping (Bool, [ErrorMessage]?) -> Void) {
+        networkManager.createUser(user) { user, errors in
+            guard let safeUser = user else {
+                onCompletion(false, errors)
+                return
+            }
+            onCompletion(true, errors)
+            self.setUser(safeUser)
         }
-        setUser(user)
-        return true
     }
 
     func setUser(_ user: User) {
         ListViewModel.fromNetwork = true
         self.user = user
-        self.user.status = "active"
     }
 
     func clearUser() {
-        user = User(id: 0, name: "", email: "", gender: "", status: "inactive")
+        setUser(User(
+            id: 0,
+            name: "",
+            email: "",
+            gender: "",
+            status: "inactive"))
     }
 }
