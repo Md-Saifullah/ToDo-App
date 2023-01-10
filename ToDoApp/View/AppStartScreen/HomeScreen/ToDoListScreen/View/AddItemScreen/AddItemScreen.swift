@@ -16,46 +16,67 @@ struct AddItemScreen: View {
     @State private var isCompleted: Bool = false
     @State private var dueDate: Date = .init()
     @State private var calendarId: Int = 0
+    @State private var alertText: String = ""
+    @State private var showProgressView: Bool = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 30) {
-            MultiSpacer(count: 1)
+        ZStack {
+            VStack(alignment: .leading, spacing: 30) {
+                MultiSpacer(count: 1)
                 
-            TextView(title: "Title:")
+                TextView(title: "Title:")
                 
-            TextFieldView(bindValue: $title, title: "Enter title")
+                TextFieldView(bindValue: $title, title: "Enter title")
                 
-            DatePicker(
-                "Set Due Date",
-                selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
-                displayedComponents: [.date])
-                .id(calendarId)
-                .onChange(of: dueDate, perform: { _ in
-                    calendarId += 1
-                })
-                .font(.title3)
-                .fontWeight(.semibold)
+                DatePicker(
+                    "Set Due Date",
+                    selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
+                    displayedComponents: [.date])
+                    .id(calendarId)
+                    .onChange(of: dueDate, perform: { _ in
+                        calendarId += 1
+                    })
+                    .font(.title3)
+                    .fontWeight(.semibold)
                 
-            Toggle(isOn: $isCompleted) {
-                TextView(title: "Status: \(isCompleted ? "Completed" : "Pending")")
+                Toggle(isOn: $isCompleted) {
+                    TextView(title: "Status: \(isCompleted ? "Completed" : "Pending")")
+                }
+                
+                CustomButtonView(title: "SAVE", action: saveItem)
+                
+                MultiSpacer(count: 3)
             }
-                
-            CustomButtonView(title: "SAVE", action: saveItem)
-                
-            MultiSpacer(count: 3)
+            .alert(alertText, isPresented: $showAlert, actions: {})
+            .navigationTitle("Add an Item 🖊️")
+            .padding(30)
+            
+            if showProgressView {
+                Color.white.opacity(0.2)
+                    .ignoresSafeArea()
+                ProgressView()
+            }
         }
-        .alert("Title can not be empty", isPresented: $showAlert, actions: {})
-        .navigationTitle("Add an Item 🖊️")
-        .padding(30)
     }
 
     private func saveItem() {
         if title.isEmpty {
+            alertText = "Title can not be empty"
             showAlert.toggle()
         }
         else {
-            listViewModel.addItem(Item(title: title, dueDate: dueDate, isCompleted: isCompleted))
-            dismiss()
+            showProgressView.toggle()
+            listViewModel.addItem(Item(title: title, dueDate: dueDate, isCompleted: isCompleted)) { success in
+                
+                showProgressView.toggle()
+                if success {
+                    dismiss()
+                }
+                else {
+                    alertText = "Failed to save.\nTry Again!"
+                    showAlert.toggle()
+                }
+            }
         }
     }
 }

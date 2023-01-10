@@ -22,7 +22,7 @@ class ListViewModel: ObservableObject {
         getItems()
     }
 
-    func addItem(_ item: Item) {
+    func addItem(_ item: Item, onCompletion: @escaping (Bool) -> Void) {
         let todo = Todo(
             id: Int(item.id) ?? 0,
             user_id: UserViewModel().user.id,
@@ -31,15 +31,18 @@ class ListViewModel: ObservableObject {
             status: item.isCompleted ? "completed" : "pending")
 
         networkManager.createTodo(todo) { data in
-            if let safeData = data {
-                let item = Item(
-                    id: String(safeData.id),
-                    title: safeData.title,
-                    dueDate: self.stringToDate(dateString: safeData.due_on) ?? Date(),
-                    isCompleted: safeData.status == "completed" ? true : false)
-
-                self.items.append(item)
+            guard let safeData = data else {
+                onCompletion(false)
+                return
             }
+
+            let item = Item(
+                id: String(safeData.id),
+                title: safeData.title,
+                dueDate: self.stringToDate(dateString: safeData.due_on) ?? Date(),
+                isCompleted: safeData.status == "completed" ? true : false)
+            onCompletion(true)
+            self.items.append(item)
         }
     }
 
@@ -70,7 +73,6 @@ class ListViewModel: ObservableObject {
 
     private func getItems() {
         if ListViewModel.fromNetwork {
-            print("from network")
             networkManager.getUserToDo(id: UserViewModel().user.id) { items in
                 if let items = items {
                     for item in items {
@@ -84,7 +86,6 @@ class ListViewModel: ObservableObject {
             }
         }
         else {
-            print("not from network")
             guard
                 let data = UserDefaults.standard.data(forKey: itemsKey),
                 let decodedData = try? JSONDecoder().decode([Item].self, from: data)

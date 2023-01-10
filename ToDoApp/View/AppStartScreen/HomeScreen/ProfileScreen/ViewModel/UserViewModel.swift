@@ -43,11 +43,9 @@ class UserViewModel: ObservableObject {
     func getUserBy(_ email: String, onCompletion: @escaping (Bool) -> Void) {
         networkManager.getUserBy(email) { data in
             if let safeData = data {
-                print("from login \(safeData)")
-                for safeData in safeData {
-                    if safeData.email == email {
-                        self.setUser(safeData)
-                    }
+                if let user = safeData.first(where: { $0.email == email }) {
+                    self.setUser(user)
+                    onCompletion(true)
                 }
             }
             onCompletion(false)
