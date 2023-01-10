@@ -27,9 +27,10 @@ class ListViewModel: ObservableObject {
             id: Int(item.id) ?? 0,
             user_id: UserViewModel().user.id,
             title: item.title,
-            due_on: dateToString(date: item.dueDate),
+            due_on: self.dateToString(date: item.dueDate),
             status: item.isCompleted ? "completed" : "pending")
 
+        print("first\n\(item)")
         networkManager.createTodo(todo) { data in
             guard let safeData = data else {
                 onCompletion(false)
@@ -41,6 +42,7 @@ class ListViewModel: ObservableObject {
                 title: safeData.title,
                 dueDate: self.stringToDate(dateString: safeData.due_on) ?? Date(),
                 isCompleted: safeData.status == "completed" ? true : false)
+            print("second\n\(item)")
             onCompletion(true)
             self.items.append(item)
         }
@@ -82,10 +84,10 @@ class ListViewModel: ObservableObject {
                             dueDate: self.stringToDate(dateString: item.due_on) ?? Date(),
                             isCompleted: item.status == "completed" ? true : false))
                     }
+                    print("third\n\(items)")
                 }
             }
-        }
-        else {
+        } else {
             guard
                 let data = UserDefaults.standard.data(forKey: itemsKey),
                 let decodedData = try? JSONDecoder().decode([Item].self, from: data)
@@ -102,13 +104,18 @@ class ListViewModel: ObservableObject {
 
     private func stringToDate(dateString: String) -> Date? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd, yyyy"
-        return formatter.date(from: dateString)
+        formatter.dateStyle = .short
+        if let date = formatter.date(from: dateString) {
+            print(date)
+            return date
+        }
+        print("came here")
+        return nil
     }
 
     private func dateToString(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-DD"
+        formatter.dateStyle = .short
         return formatter.string(from: date)
     }
 }

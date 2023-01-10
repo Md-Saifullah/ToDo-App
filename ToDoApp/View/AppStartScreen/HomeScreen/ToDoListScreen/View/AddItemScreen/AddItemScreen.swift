@@ -63,16 +63,13 @@ struct AddItemScreen: View {
         if title.isEmpty {
             alertText = "Title can not be empty"
             showAlert.toggle()
-        }
-        else {
+        } else {
             showProgressView.toggle()
             listViewModel.addItem(Item(title: title, dueDate: dueDate, isCompleted: isCompleted)) { success in
-                
                 showProgressView.toggle()
                 if success {
                     dismiss()
-                }
-                else {
+                } else {
                     alertText = "Failed to save.\nTry Again!"
                     showAlert.toggle()
                 }
