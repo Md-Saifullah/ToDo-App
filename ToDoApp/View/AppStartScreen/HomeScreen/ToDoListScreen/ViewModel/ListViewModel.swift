@@ -23,7 +23,24 @@ class ListViewModel: ObservableObject {
     }
 
     func addItem(_ item: Item) {
-        items.append(item)
+        let todo = Todo(
+            id: Int(item.id) ?? 0,
+            user_id: UserViewModel().user.id,
+            title: item.title,
+            due_on: dateToString(date: item.dueDate),
+            status: item.isCompleted ? "completed" : "pending")
+
+        networkManager.createTodo(todo) { data in
+            if let safeData = data {
+                let item = Item(
+                    id: String(safeData.id),
+                    title: safeData.title,
+                    dueDate: self.stringToDate(dateString: safeData.due_on) ?? Date(),
+                    isCompleted: safeData.status == "completed" ? true : false)
+
+                self.items.append(item)
+            }
+        }
     }
 
     func deleteItem(at indexSet: IndexSet) {
@@ -86,5 +103,11 @@ class ListViewModel: ObservableObject {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, yyyy"
         return formatter.date(from: dateString)
+    }
+
+    private func dateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-DD"
+        return formatter.string(from: date)
     }
 }

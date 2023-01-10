@@ -10,7 +10,48 @@ struct NetworkManager {
     let prefixUrl = "https://gorest.co.in/public/v2"
     let bearer = "5b12feb3ddfac89a73dfe2e34b948bfdc7c5872c06079e95dbf877032a1321bc"
 
-    func getUserToDo(id: Int, onCompletion: @escaping ([Items]?) -> Void) {
+    func createTodo(_ todo: Todo, onCompletion: @escaping (Todo?) -> Void) {
+        guard let url = URL(string: "\(prefixUrl)/users/\(todo.user_id)/todos") else {
+            onCompletion(nil)
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print(todo)
+
+        let body = TodoResponseModel(title: todo.title, due_on: todo.due_on, status: todo.status)
+        do {
+            let encodedTodo = try JSONEncoder().encode(body)
+            request.httpBody = encodedTodo
+        } catch {
+            print(error)
+            onCompletion(nil)
+            return
+        }
+        let task = URLSession(configuration: .default).dataTask(with: request) { data, _, error in
+            if error == nil {
+                if let safeData = data {
+                    print("came here")
+                    do {
+                        let decodedTodo = try JSONDecoder().decode(Todo.self, from: safeData)
+                        DispatchQueue.main.async {
+                            print(decodedTodo)
+                            onCompletion(decodedTodo)
+                        }
+                    } catch {
+                        onCompletion(nil)
+                        print(error)
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+
+    func getUserToDo(id: Int, onCompletion: @escaping ([Todo]?) -> Void) {
         print(id)
         guard let url = URL(string: "\(prefixUrl)/users/\(id)/todos") else {
             print("URL error")
@@ -24,7 +65,7 @@ struct NetworkManager {
             if error == nil {
                 if let safeData = data {
                     do {
-                        let decodedTodos = try JSONDecoder().decode([Items].self, from: safeData)
+                        let decodedTodos = try JSONDecoder().decode([Todo].self, from: safeData)
                         DispatchQueue.main.async {
                             onCompletion(decodedTodos)
                         }
@@ -39,9 +80,7 @@ struct NetworkManager {
         task.resume()
     }
 
-    
     func getUserBy(_ email: String, onCompletion: @escaping ([User]?) -> Void) {
-        
         guard let url = URL(string: "\(prefixUrl)/users?email=\(email)") else {
             onCompletion(nil)
             return
