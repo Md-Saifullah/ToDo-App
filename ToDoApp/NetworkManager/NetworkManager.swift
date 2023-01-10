@@ -10,6 +10,36 @@ struct NetworkManager {
     let prefixUrl = "https://gorest.co.in/public/v2"
     let bearer = "5b12feb3ddfac89a73dfe2e34b948bfdc7c5872c06079e95dbf877032a1321bc"
 
+    func getUserToDo(id: Int, onCompletion: @escaping ([Items]?) -> Void) {
+        print(id)
+        guard let url = URL(string: "\(prefixUrl)/users/\(id)/todos") else {
+            print("URL error")
+            onCompletion(nil)
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        let task = URLSession(configuration: .default).dataTask(with: request) { data, _, error in
+            if error == nil {
+                if let safeData = data {
+                    do {
+                        let decodedTodos = try JSONDecoder().decode([Items].self, from: safeData)
+                        DispatchQueue.main.async {
+                            onCompletion(decodedTodos)
+                        }
+                    } catch {
+                        print("catch Error")
+                        onCompletion(nil)
+                        print("\(String(describing: error))")
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+
+    
     func getUserBy(_ email: String, onCompletion: @escaping ([User]?) -> Void) {
         
         guard let url = URL(string: "\(prefixUrl)/users?email=\(email)") else {

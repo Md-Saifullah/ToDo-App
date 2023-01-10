@@ -54,6 +54,17 @@ class ListViewModel: ObservableObject {
     private func getItems() {
         if ListViewModel.fromNetwork {
             print("from network")
+            networkManager.getUserToDo(id: UserViewModel().user.id) { items in
+                if let items = items {
+                    for item in items {
+                        self.items.append(Item(
+                            id: String(item.id),
+                            title: item.title,
+                            dueDate: self.stringToDate(dateString: item.due_on) ?? Date(),
+                            isCompleted: item.status == "completed" ? true : false))
+                    }
+                }
+            }
         }
         else {
             print("not from network")
@@ -69,5 +80,11 @@ class ListViewModel: ObservableObject {
         if let encodedData = try? JSONEncoder().encode(items) {
             UserDefaults.standard.set(encodedData, forKey: itemsKey)
         }
+    }
+
+    private func stringToDate(dateString: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, yyyy"
+        return formatter.date(from: dateString)
     }
 }

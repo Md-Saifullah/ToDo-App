@@ -20,3 +20,11 @@ struct Item: Identifiable, Codable {
         self.isCompleted = isCompleted
     }
 }
+
+struct Items: Codable {
+    let id: Int
+    let user_id: Int
+    let title: String
+    let due_on: String
+    let status: String
+}
