@@ -21,7 +21,7 @@ struct Item: Identifiable, Codable {
     }
 }
 
-struct Items: Codable {
+struct Todo: Codable {
     let id: Int
     let user_id: Int
     let title: String

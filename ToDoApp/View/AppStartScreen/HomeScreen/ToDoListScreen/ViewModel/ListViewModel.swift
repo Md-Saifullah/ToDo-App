@@ -22,8 +22,28 @@ class ListViewModel: ObservableObject {
         getItems()
     }
 
-    func addItem(_ item: Item) {
-        items.append(item)
+    func addItem(_ item: Item, onCompletion: @escaping (Bool) -> Void) {
+        let todo = Todo(
+            id: Int(item.id) ?? 0,
+            user_id: UserViewModel().user.id,
+            title: item.title,
+            due_on: dateToString(date: item.dueDate),
+            status: item.isCompleted ? "completed" : "pending")
+
+        networkManager.createTodo(todo) { data in
+            guard let safeData = data else {
+                onCompletion(false)
+                return
+            }
+
+            let item = Item(
+                id: String(safeData.id),
+                title: safeData.title,
+                dueDate: self.stringToDate(dateString: safeData.due_on) ?? Date(),
+                isCompleted: safeData.status == "completed" ? true : false)
+            onCompletion(true)
+            self.items.append(item)
+        }
     }
 
     func deleteItem(at indexSet: IndexSet) {
@@ -53,7 +73,6 @@ class ListViewModel: ObservableObject {
 
     private func getItems() {
         if ListViewModel.fromNetwork {
-            print("from network")
             networkManager.getUserToDo(id: UserViewModel().user.id) { items in
                 if let items = items {
                     for item in items {
@@ -67,7 +86,6 @@ class ListViewModel: ObservableObject {
             }
         }
         else {
-            print("not from network")
             guard
                 let data = UserDefaults.standard.data(forKey: itemsKey),
                 let decodedData = try? JSONDecoder().decode([Item].self, from: data)
@@ -86,5 +104,11 @@ class ListViewModel: ObservableObject {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, yyyy"
         return formatter.date(from: dateString)
+    }
+
+    private func dateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-DD"
+        return formatter.string(from: date)
     }
 }

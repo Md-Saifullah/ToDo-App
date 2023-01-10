@@ -9,29 +9,31 @@ import Foundation
 struct NetworkManager {
     let prefixUrl = "https://gorest.co.in/public/v2"
     let bearer = "5b12feb3ddfac89a73dfe2e34b948bfdc7c5872c06079e95dbf877032a1321bc"
+    let session = URLSession(configuration: .default)
 
-    func getUserToDo(id: Int, onCompletion: @escaping ([Items]?) -> Void) {
-        print(id)
-        guard let url = URL(string: "\(prefixUrl)/users/\(id)/todos") else {
-            print("URL error")
+    func createTodo(_ todo: Todo, onCompletion: @escaping (Todo?) -> Void) {
+        guard let url = URL(string: "\(prefixUrl)/users/\(todo.user_id)/todos") else {
             onCompletion(nil)
             return
         }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
-        let task = URLSession(configuration: .default).dataTask(with: request) { data, _, error in
+        var request = createRequest(url: url, method: "POST")
+        do {
+            let encodedTodo = try JSONEncoder().encode(todo)
+            request.httpBody = encodedTodo
+        } catch {
+            onCompletion(nil)
+            return
+        }
+        let task = session.dataTask(with: request) { data, _, error in
             if error == nil {
                 if let safeData = data {
                     do {
-                        let decodedTodos = try JSONDecoder().decode([Items].self, from: safeData)
+                        let decodedTodo = try JSONDecoder().decode(Todo.self, from: safeData)
                         DispatchQueue.main.async {
-                            onCompletion(decodedTodos)
+                            onCompletion(decodedTodo)
                         }
                     } catch {
-                        print("catch Error")
                         onCompletion(nil)
-                        print("\(String(describing: error))")
                     }
                 }
             }
@@ -39,17 +41,36 @@ struct NetworkManager {
         task.resume()
     }
 
-    
+    func getUserToDo(id: Int, onCompletion: @escaping ([Todo]?) -> Void) {
+        guard let url = URL(string: "\(prefixUrl)/users/\(id)/todos") else {
+            onCompletion(nil)
+            return
+        }
+        let request = createRequest(url: url, method: "GET")
+        let task = session.dataTask(with: request) { data, _, error in
+            if error == nil {
+                if let safeData = data {
+                    do {
+                        let decodedTodos = try JSONDecoder().decode([Todo].self, from: safeData)
+                        DispatchQueue.main.async {
+                            onCompletion(decodedTodos)
+                        }
+                    } catch {
+                        onCompletion(nil)
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+
     func getUserBy(_ email: String, onCompletion: @escaping ([User]?) -> Void) {
-        
         guard let url = URL(string: "\(prefixUrl)/users?email=\(email)") else {
             onCompletion(nil)
             return
         }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
-        let task = URLSession(configuration: .default).dataTask(with: request) { data, _, error in
+        let request = createRequest(url: url, method: "GET")
+        let task = session.dataTask(with: request) { data, _, error in
             if error == nil {
                 if let safeData = data {
                     do {
@@ -59,7 +80,6 @@ struct NetworkManager {
                         }
                     } catch {
                         onCompletion(nil)
-                        print(error)
                     }
                 }
             }
@@ -73,11 +93,7 @@ struct NetworkManager {
             return
         }
 
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        var request = createRequest(url: url, method: "POST")
 
         do {
             let encodedData = try JSONEncoder().encode(user)
@@ -86,7 +102,7 @@ struct NetworkManager {
             onCompletion(nil, [ErrorMessage(field: "Input data", message: "Invalid")])
         }
 
-        let task = URLSession(configuration: .default).dataTask(with: request) { data, _, error in
+        let task = session.dataTask(with: request) { data, _, error in
 
             if error == nil {
                 if let safeData = data {
@@ -107,5 +123,16 @@ struct NetworkManager {
             }
         }
         task.resume()
+    }
+
+    private func createRequest(url: URL, method: String) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        if method == "POST" {
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
+        return request
     }
 }
