@@ -21,7 +21,7 @@ struct HomeScreen: View {
 
             NavigationView {
                 ProfileScreen()
-                    .navigationTitle("Profile:")
+                    .navigationTitle("Profile \(UserViewModel().user.gender == "female" ? "👩🏻‍🦱" : "🧑🏻‍🦱")")
                     .navigationBarTitleDisplayMode(.large)
             }
             .tabItem { Label("profile", systemImage: "person") }

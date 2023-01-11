@@ -56,7 +56,7 @@ struct LogInScreen: View {
                 id: Int.random(in: 10000 ... 99999),
                 name: name,
                 email: email,
-                gender: "male",
+                gender: "female",
                 status: "active")
             
             userViewModel.createUser(user) { success, errors in
@@ -87,7 +87,7 @@ struct LogInScreen: View {
                     alertText = "No user found. Please check Name and Email or Sign Up for new account"
                     showAlert.toggle()
                 }
-                else{
+                else {
                     listViewModel.getItemsFromNetwork()
                 }
             }

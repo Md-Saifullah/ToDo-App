@@ -49,7 +49,6 @@ struct AddItemScreen: View {
             }
             .alert(alertText, isPresented: $showAlert, actions: {})
             .navigationTitle("Add an Item 🖊️")
-            .navigationBarTitleDisplayMode(.inline)
             .padding(30)
                 
             if showProgressView {

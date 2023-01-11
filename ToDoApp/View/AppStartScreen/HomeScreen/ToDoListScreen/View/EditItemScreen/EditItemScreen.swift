@@ -62,7 +62,6 @@ struct EditItemScreen: View {
         .alert(alertText, isPresented: $titleAlert, actions: {})
         .onAppear(perform: setScreen)
         .navigationTitle("Edit Item 🖊️")
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func setScreen() {
