@@ -17,5 +17,5 @@ struct User: Codable {
 
 struct ErrorMessage: Codable {
     let field: String
-    let message:String
+    let message: String
 }

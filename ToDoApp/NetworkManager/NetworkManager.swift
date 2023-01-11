@@ -16,7 +16,9 @@ struct NetworkManager {
             onCompletion(nil)
             return
         }
+
         var request = createRequest(url: url, method: "POST")
+
         do {
             let encodedTodo = try JSONEncoder().encode(todo)
             request.httpBody = encodedTodo
@@ -24,6 +26,7 @@ struct NetworkManager {
             onCompletion(nil)
             return
         }
+
         let task = session.dataTask(with: request) { data, _, error in
             if error == nil {
                 if let safeData = data {
@@ -46,7 +49,9 @@ struct NetworkManager {
             onCompletion(nil)
             return
         }
+
         let request = createRequest(url: url, method: "GET")
+
         let task = session.dataTask(with: request) { data, _, error in
             if error == nil {
                 if let safeData = data {
@@ -69,7 +74,9 @@ struct NetworkManager {
             onCompletion(nil)
             return
         }
+
         let request = createRequest(url: url, method: "GET")
+
         let task = session.dataTask(with: request) { data, _, error in
             if error == nil {
                 if let safeData = data {
@@ -129,6 +136,7 @@ struct NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+
         if method == "POST" {
             request.setValue("application/json", forHTTPHeaderField: "Accept")
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")

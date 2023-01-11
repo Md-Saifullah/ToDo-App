@@ -23,16 +23,6 @@ struct ToDoListScreen: View {
             }
             .listStyle(.plain)
             .padding(.top)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddItemScreen()) {
-                        Image(systemName: "note.text.badge.plus")
-                    }
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    EditButton()
-                }
-            }
         }
     }
 

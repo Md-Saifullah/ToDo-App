@@ -29,7 +29,6 @@ class ListViewModel: ObservableObject {
             due_on: dateToString(date: item.dueDate),
             status: item.isCompleted ? "completed" : "pending")
 
-        print("first\n\(item)")
         networkManager.createTodo(todo) { todo in
             guard let safeTodo = todo else {
                 onCompletion(false)
@@ -39,9 +38,8 @@ class ListViewModel: ObservableObject {
             let item = Item(
                 id: String(safeTodo.id),
                 title: safeTodo.title,
-                dueDate: item.dueDate, // self.stringToDate(dateString: safeData.due_on) ?? Date(),
+                dueDate: item.dueDate,
                 isCompleted: safeTodo.status == "completed" ? true : false)
-            print("second\n\(item)")
             onCompletion(true)
             self.items.append(item)
         }
@@ -82,7 +80,6 @@ class ListViewModel: ObservableObject {
                         dueDate: self.stringToDate(dateString: todo.due_on) ?? Date(),
                         isCompleted: todo.status == "completed" ? true : false))
                 }
-                print("third\n\(todos)")
             }
         }
     }
@@ -105,10 +102,8 @@ class ListViewModel: ObservableObject {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         if let date = formatter.date(from: dateString) {
-            print(date)
             return date
         }
-        print("came here")
         return nil
     }
 

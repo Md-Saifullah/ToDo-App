@@ -30,7 +30,8 @@ struct AddItemScreen: View {
                     
                 DatePicker(
                     "Set Due Date",
-                    selection: $dueDate, in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
+                    selection: $dueDate,
+                    in: Date() ... (Calendar.current.date(from: DateComponents(year: 2099)) ?? Date()),
                     displayedComponents: [.date])
                     .id(calendarId)
                     .onChange(of: dueDate, perform: { _ in
@@ -65,6 +66,7 @@ struct AddItemScreen: View {
             showAlert.toggle()
         } else {
             showProgressView.toggle()
+            
             listViewModel.addItem(Item(title: title, dueDate: dueDate, isCompleted: isCompleted)) { success in
                 showProgressView.toggle()
                 if success {
