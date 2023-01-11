@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeScreen: View {
     @State private var tab: Int = 0
-    @StateObject var listViewModel: ListViewModel = .init()
     var body: some View {
         TabView(selection: $tab) {
             ToDoListScreen()
@@ -20,7 +19,7 @@ struct HomeScreen: View {
                 .tabItem { Label("profile", systemImage: "person") }
                 .tag(1)
         }
-        .environmentObject(listViewModel)
+        .navigationBarTitleDisplayMode(tab == 1 ? .inline : .large)
     }
 }
 

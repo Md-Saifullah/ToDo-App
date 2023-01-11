@@ -64,7 +64,6 @@ class UserViewModel: ObservableObject {
     }
 
     func setUser(_ user: User) {
-        ListViewModel.fromNetwork = true
         self.user = user
     }
 

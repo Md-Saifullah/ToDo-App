@@ -14,7 +14,6 @@ class ListViewModel: ObservableObject {
         }
     }
 
-    static var fromNetwork: Bool = false
     private let networkManager = NetworkManager()
     private let itemsKey: String = "items"
 
@@ -73,27 +72,27 @@ class ListViewModel: ObservableObject {
         return index
     }
 
-    private func getItems() {
-        if ListViewModel.fromNetwork {
-            networkManager.getUserToDo(id: UserViewModel().user.id) { todos in
-                if let todos = todos {
-                    for todo in todos {
-                        self.items.append(Item(
-                            id: String(todo.id),
-                            title: todo.title,
-                            dueDate: self.stringToDate(dateString: todo.due_on) ?? Date(),
-                            isCompleted: todo.status == "completed" ? true : false))
-                    }
-                    print("third\n\(todos)")
+    func getItemsFromNetwork() {
+        networkManager.getUserToDo(id: UserViewModel().user.id) { todos in
+            if let todos = todos {
+                for todo in todos {
+                    self.items.append(Item(
+                        id: String(todo.id),
+                        title: todo.title,
+                        dueDate: self.stringToDate(dateString: todo.due_on) ?? Date(),
+                        isCompleted: todo.status == "completed" ? true : false))
                 }
+                print("third\n\(todos)")
             }
-        } else {
-            guard
-                let data = UserDefaults.standard.data(forKey: itemsKey),
-                let decodedData = try? JSONDecoder().decode([Item].self, from: data)
-            else { return }
-            items = decodedData
         }
+    }
+
+    private func getItems() {
+        guard
+            let data = UserDefaults.standard.data(forKey: itemsKey),
+            let decodedData = try? JSONDecoder().decode([Item].self, from: data)
+        else { return }
+        items = decodedData
     }
 
     private func saveItems() {

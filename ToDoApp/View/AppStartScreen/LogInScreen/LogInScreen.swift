@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LogInScreen: View {
     @EnvironmentObject var userViewModel: UserViewModel
-    
+    @EnvironmentObject var listViewModel: ListViewModel
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var showProgressView: Bool = false
@@ -86,6 +86,9 @@ struct LogInScreen: View {
                     showProgressView.toggle()
                     alertText = "No user found. Please check Name and Email or Sign Up for new account"
                     showAlert.toggle()
+                }
+                else{
+                    listViewModel.getItemsFromNetwork()
                 }
             }
         }

@@ -14,8 +14,6 @@ struct ProfileScreen: View {
     var body: some View {
         NavigationView {
             VStack {
-                Spacer()
-                
                 RoundedRectangle(cornerRadius: 20)
                     .fill(.background)
                     .frame(maxWidth: .infinity, maxHeight: 200)
@@ -42,7 +40,7 @@ struct ProfileScreen: View {
             .navigationTitle("Profile:")
         }
     }
-    
+
     private func logOut() {
         withAnimation(.easeInOut) {
             userViewModel.clearUser()

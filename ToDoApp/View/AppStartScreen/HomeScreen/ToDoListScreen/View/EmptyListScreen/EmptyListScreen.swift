@@ -14,42 +14,41 @@ struct EmptyListScreen: View {
     private let colorTo: Color = .init(#colorLiteral(red: 0.08707077056, green: 0.4981409311, blue: 0.7414988875, alpha: 1))
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 10) {
-                TextView(
-                    title: "No Items",
-                    fontSize: .title,
-                    fontWeight: .semibold
-                )
+        VStack(spacing: 10) {
+            TextView(
+                title: "No Items",
+                fontSize: .title,
+                fontWeight: .semibold
+            )
 
-                Text("Are you a productive person? I think you should click the add button and add a bunch of items to your todo list!")
-                    .padding(.bottom)
+            Text("Are you a productive person? I think you should click the add button and add a bunch of items to your todo list!")
+                .padding(.bottom)
 
-                NavigationLink(
-                    destination: AddItemScreen(),
-                    label: {
-                        Text("Add Something 🥳")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, minHeight: 55)
-                            .background(animate ? colorFrom : colorTo)
-                            .cornerRadius(30)
-                    }
-                )
-                .padding(.horizontal, animate ? 30 : 45)
-                .shadow(
-                    color: animate ? colorFrom.opacity(0.9) : colorTo.opacity(0.7),
-                    radius: animate ? 30 : 10,
-                    x: 0,
-                    y: animate ? 50 : 30
-                )
-                .scaleEffect(animate ? 1.1 : 1.0)
-                .offset(y: animate ? -7 : 0)
-            }
-            .multilineTextAlignment(.center)
-            .padding(40)
-            .onAppear(perform: addAnimation)
+            NavigationLink(
+                destination: AddItemScreen(),
+                label: {
+                    Text("Add Something 🥳")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, minHeight: 55)
+                        .background(animate ? colorFrom : colorTo)
+                        .cornerRadius(30)
+                }
+            )
+            .padding(.horizontal, animate ? 30 : 45)
+            .shadow(
+                color: animate ? colorFrom.opacity(0.9) : colorTo.opacity(0.7),
+                radius: animate ? 30 : 10,
+                x: 0,
+                y: animate ? 50 : 30
+            )
+            .scaleEffect(animate ? 1.1 : 1.0)
+            .offset(y: animate ? -7 : 0)
+            Spacer()
         }
+        .multilineTextAlignment(.center)
+        .padding(40)
+        .onAppear(perform: addAnimation)
         .navigationTitle("ToDo App 📝")
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
