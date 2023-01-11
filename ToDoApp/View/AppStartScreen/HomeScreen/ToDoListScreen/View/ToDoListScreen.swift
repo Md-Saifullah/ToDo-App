@@ -11,30 +11,26 @@ struct ToDoListScreen: View {
     @EnvironmentObject var listViewModel: ListViewModel
 
     var body: some View {
-        NavigationView {
-            if listViewModel.items.isEmpty {
-                EmptyListScreen()
-            } else {
-                List {
-                    ForEach(listViewModel.items) { item in
-                        ToDoListRowView(item: item)
-                    }
-                    .onDelete(perform: deleteItem)
-                    .onMove(perform: moveItem)
+        if listViewModel.items.isEmpty {
+            EmptyListScreen()
+        } else {
+            List {
+                ForEach(listViewModel.items) { item in
+                    ToDoListRowView(item: item)
                 }
-                .navigationTitle("ToDo App 📝")
-                .navigationBarTitleDisplayMode(.large)
-                .listStyle(.plain)
-                .padding(.top)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: AddItemScreen()) {
-                            Image(systemName: "note.text.badge.plus")
-                        }
+                .onDelete(perform: deleteItem)
+                .onMove(perform: moveItem)
+            }
+            .listStyle(.plain)
+            .padding(.top)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: AddItemScreen()) {
+                        Image(systemName: "note.text.badge.plus")
                     }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        EditButton()
-                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
                 }
             }
         }
