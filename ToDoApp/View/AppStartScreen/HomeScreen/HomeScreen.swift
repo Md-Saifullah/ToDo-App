@@ -19,7 +19,6 @@ struct HomeScreen: View {
                 .tabItem { Label("profile", systemImage: "person") }
                 .tag(1)
         }
-        .navigationBarTitleDisplayMode(tab == 1 ? .inline : .large)
     }
 }
 

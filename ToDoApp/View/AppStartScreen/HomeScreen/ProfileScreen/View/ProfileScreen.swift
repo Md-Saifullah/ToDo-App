@@ -38,6 +38,7 @@ struct ProfileScreen: View {
             }
             .padding()
             .navigationTitle("Profile:")
+            .navigationBarTitleDisplayMode(.large)
         }
     }
 

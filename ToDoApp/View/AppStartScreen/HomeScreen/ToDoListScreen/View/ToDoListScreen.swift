@@ -23,6 +23,7 @@ struct ToDoListScreen: View {
                     .onMove(perform: moveItem)
                 }
                 .navigationTitle("ToDo App 📝")
+                .navigationBarTitleDisplayMode(.large)
                 .listStyle(.plain)
                 .padding(.top)
                 .toolbar {
