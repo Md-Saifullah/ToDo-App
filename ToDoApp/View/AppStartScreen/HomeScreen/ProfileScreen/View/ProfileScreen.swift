@@ -41,8 +41,8 @@ struct ProfileScreen: View {
     private func logOut() {
         withAnimation(.easeInOut) {
             userViewModel.clearUser()
+            listViewModel.clearItems()
         }
-        listViewModel.clearItems()
     }
 }
 

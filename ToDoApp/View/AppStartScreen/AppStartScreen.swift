@@ -10,6 +10,7 @@ import SwiftUI
 struct AppStartScreen: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @StateObject var listViewModel: ListViewModel = .init()
+
     var body: some View {
         NavigationStack {
             if userViewModel.user.status == "active" {

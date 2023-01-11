@@ -20,6 +20,7 @@
 		337680ED2967F65100CBE272 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337680EC2967F65100CBE272 /* NetworkManager.swift */; };
 		337EE62E295580E9004231C6 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337EE62D295580E9004231C6 /* ProfileScreen.swift */; };
 		337EE6302955A9A3004231C6 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337EE62F2955A9A3004231C6 /* HomeScreen.swift */; };
+		3381BED2296EC75100513AE6 /* isValidExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381BED1296EC75100513AE6 /* isValidExtension.swift */; };
 		33B087FC295962A70009DBCD /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B087FB295962A70009DBCD /* ListViewModel.swift */; };
 		33B087FE295964370009DBCD /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B087FD295964370009DBCD /* UserViewModel.swift */; };
 		33B088022959A67B0009DBCD /* EmptyListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B088012959A67B0009DBCD /* EmptyListScreen.swift */; };
@@ -47,6 +48,7 @@
 		337680EC2967F65100CBE272 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		337EE62D295580E9004231C6 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		337EE62F2955A9A3004231C6 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		3381BED1296EC75100513AE6 /* isValidExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isValidExtension.swift; sourceTree = "<group>"; };
 		33B087FB295962A70009DBCD /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		33B087FD295964370009DBCD /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		33B088012959A67B0009DBCD /* EmptyListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListScreen.swift; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 				337680EC2967F65100CBE272 /* NetworkManager.swift */,
 			);
 			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		3381BED0296EC72F00513AE6 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3381BED1296EC75100513AE6 /* isValidExtension.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		33B29AB12963FC87004DDC29 /* HomeScreen */ = {
@@ -174,6 +184,7 @@
 		33B29ABE29640007004DDC29 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3381BED0296EC72F00513AE6 /* Helper */,
 				331E9ECB295413D40023DA7D /* Shared */,
 			);
 			path = Resources;
@@ -356,6 +367,7 @@
 				33CC93492955676C0023E7E6 /* AddItemScreen.swift in Sources */,
 				337EE6302955A9A3004231C6 /* HomeScreen.swift in Sources */,
 				334E827429545147006CF31E /* ItemModel.swift in Sources */,
+				3381BED2296EC75100513AE6 /* isValidExtension.swift in Sources */,
 				331E9ED3295419270023DA7D /* CustomButtonView.swift in Sources */,
 				337EE62E295580E9004231C6 /* ProfileScreen.swift in Sources */,
 				331E9ECF295414D20023DA7D /* TextFieldView.swift in Sources */,

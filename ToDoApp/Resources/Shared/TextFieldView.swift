@@ -9,9 +9,9 @@ import SwiftUI
 
 struct TextFieldView: View {
     @Binding var bindValue: String
-    
+
     var title: String = ""
-    
+
     var body: some View {
         TextField("\(title)", text: $bindValue)
             .autocorrectionDisabled(true)

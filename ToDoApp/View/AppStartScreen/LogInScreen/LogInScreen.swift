@@ -10,6 +10,7 @@ import SwiftUI
 struct LogInScreen: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var listViewModel: ListViewModel
+    
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var showProgressView: Bool = false
@@ -40,6 +41,7 @@ struct LogInScreen: View {
             }
             .alert("\(alertText)", isPresented: $showAlert, actions: {})
             .padding(30)
+            
             if showProgressView {
                 Color.white.opacity(0.2)
                     .ignoresSafeArea()
@@ -93,10 +95,10 @@ struct LogInScreen: View {
             }
         }
     }
-
-    func validateField() -> Bool {
-        if name.isEmpty || email.isEmpty {
-            name.isEmpty ? (alertText = "Name Field can not be empty") : (alertText = "Email Field can not be empty")
+    
+    private func validateField() -> Bool {
+        if name.isEmpty || !email.isValid {
+            name.isEmpty ? (alertText = "Name Field can not be empty") : (alertText = "Invalid email")
             showAlert.toggle()
             return false
         }
