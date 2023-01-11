@@ -27,21 +27,21 @@ class ListViewModel: ObservableObject {
             id: Int(item.id) ?? 0,
             user_id: UserViewModel().user.id,
             title: item.title,
-            due_on: self.dateToString(date: item.dueDate),
+            due_on: dateToString(date: item.dueDate),
             status: item.isCompleted ? "completed" : "pending")
 
         print("first\n\(item)")
-        networkManager.createTodo(todo) { data in
-            guard let safeData = data else {
+        networkManager.createTodo(todo) { todo in
+            guard let safeTodo = todo else {
                 onCompletion(false)
                 return
             }
 
             let item = Item(
-                id: String(safeData.id),
-                title: safeData.title,
-                dueDate: self.stringToDate(dateString: safeData.due_on) ?? Date(),
-                isCompleted: safeData.status == "completed" ? true : false)
+                id: String(safeTodo.id),
+                title: safeTodo.title,
+                dueDate: item.dueDate, // self.stringToDate(dateString: safeData.due_on) ?? Date(),
+                isCompleted: safeTodo.status == "completed" ? true : false)
             print("second\n\(item)")
             onCompletion(true)
             self.items.append(item)
@@ -75,16 +75,16 @@ class ListViewModel: ObservableObject {
 
     private func getItems() {
         if ListViewModel.fromNetwork {
-            networkManager.getUserToDo(id: UserViewModel().user.id) { items in
-                if let items = items {
-                    for item in items {
+            networkManager.getUserToDo(id: UserViewModel().user.id) { todos in
+                if let todos = todos {
+                    for todo in todos {
                         self.items.append(Item(
-                            id: String(item.id),
-                            title: item.title,
-                            dueDate: self.stringToDate(dateString: item.due_on) ?? Date(),
-                            isCompleted: item.status == "completed" ? true : false))
+                            id: String(todo.id),
+                            title: todo.title,
+                            dueDate: self.stringToDate(dateString: todo.due_on) ?? Date(),
+                            isCompleted: todo.status == "completed" ? true : false))
                     }
-                    print("third\n\(items)")
+                    print("third\n\(todos)")
                 }
             }
         } else {
@@ -104,7 +104,7 @@ class ListViewModel: ObservableObject {
 
     private func stringToDate(dateString: String) -> Date? {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         if let date = formatter.date(from: dateString) {
             print(date)
             return date
@@ -115,7 +115,7 @@ class ListViewModel: ObservableObject {
 
     private func dateToString(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         return formatter.string(from: date)
     }
 }

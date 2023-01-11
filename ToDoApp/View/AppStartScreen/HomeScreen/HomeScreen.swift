@@ -13,12 +13,10 @@ struct HomeScreen: View {
     var body: some View {
         TabView(selection: $tab) {
             ToDoListScreen()
-                //.environmentObject(listViewModel)
                 .tabItem { Label("ToDo", systemImage: "note.text") }
                 .tag(0)
 
             ProfileScreen()
-                //.environmentObject(listViewModel)
                 .tabItem { Label("profile", systemImage: "person") }
                 .tag(1)
         }
