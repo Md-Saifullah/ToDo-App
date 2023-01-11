@@ -11,11 +11,10 @@ struct AppStartScreen: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @StateObject var listViewModel: ListViewModel = .init()
     var body: some View {
-        NavigationView {
+        NavigationStack {
             if userViewModel.user.status == "active" {
                 withAnimation(.easeInOut) {
                     HomeScreen()
-                        .navigationTitle("ToDo App 📝")
                 }
             } else {
                 withAnimation(.easeInOut) {
