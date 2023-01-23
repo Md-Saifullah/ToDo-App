@@ -58,7 +58,7 @@ struct LogInScreen: View {
                 id: Int.random(in: 10000 ... 99999),
                 name: name,
                 email: email,
-                gender: "female",
+                gender: "male",
                 status: "active")
             
             userViewModel.createUser(user) { success, errors in
