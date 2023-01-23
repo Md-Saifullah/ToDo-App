@@ -11,7 +11,7 @@ import Foundation
 struct NetworkManager {
     let prefixUrl = "https://gorest.co.in/public/v2"
     let headers: HTTPHeaders = [
-        "Authorization": "Bearer 5b12feb3ddfac89a73dfe2e34b948bfdc7c5872c06079e95dbf877032a1321bc"
+        "Authorization": "Bearer Token"
     ]
 
     func createTodo(_ todo: Todo, onCompletion: @escaping (Todo?) -> Void) {
