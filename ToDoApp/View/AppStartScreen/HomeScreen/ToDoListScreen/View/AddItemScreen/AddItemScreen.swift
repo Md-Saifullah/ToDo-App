@@ -48,6 +48,7 @@ struct AddItemScreen: View {
                     
                 MultiSpacer(count: 3)
             }
+            .ignoresSafeArea(.keyboard)
             .alert(alertText, isPresented: $showAlert, actions: {})
             .navigationTitle("Add an Item 🖊️")
             .padding(30)

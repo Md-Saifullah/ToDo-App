@@ -11,7 +11,7 @@ import Foundation
 struct NetworkManager {
     let prefixUrl = "https://gorest.co.in/public/v2"
     let headers: HTTPHeaders = [
-        "Authorization": "Bearer Token"
+        "Authorization": "bearertoken"
     ]
 
     func createTodo(_ todo: Todo, onCompletion: @escaping (Todo?) -> Void) {
@@ -34,7 +34,7 @@ struct NetworkManager {
     func getUserToDo(id: Int, onCompletion: @escaping ([Todo]?) -> Void) {
         let url = "\(prefixUrl)/users/\(id)/todos"
 
-        AF.request(url, headers: headers).responseDecodable(of: Todo.self) { response in
+        AF.request(url, headers: headers).responseDecodable(of: Todo.self, queue: .main) { response in
             if let safeData = response.data {
                 do {
                     let decodedData = try JSONDecoder().decode([Todo].self, from: safeData)

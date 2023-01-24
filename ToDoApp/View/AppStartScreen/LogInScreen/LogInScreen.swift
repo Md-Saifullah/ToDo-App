@@ -39,6 +39,7 @@ struct LogInScreen: View {
                 }
                 MultiSpacer(count: 3)
             }
+            .ignoresSafeArea(.keyboard)
             .alert("\(alertText)", isPresented: $showAlert, actions: {})
             .padding(30)
             
@@ -91,6 +92,7 @@ struct LogInScreen: View {
                 }
                 else {
                     listViewModel.getItemsFromNetwork()
+                    showProgressView.toggle()
                 }
             }
         }
