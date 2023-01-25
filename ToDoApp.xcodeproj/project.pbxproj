@@ -33,6 +33,7 @@
 		33BE6DEE29532E1300F1C43D /* ToDoListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BE6DED29532E1300F1C43D /* ToDoListScreen.swift */; };
 		33CC93492955676C0023E7E6 /* AddItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC93482955676C0023E7E6 /* AddItemScreen.swift */; };
 		33DD266A2980033500E5A01D /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD26692980033500E5A01D /* Env.swift */; };
+		33F54CA829815B1F00E7505A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F54CA729815B1F00E7505A /* AppDelegate.swift */; };
 		3D9AAB41126188CC19993D6D /* Pods_ToDoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C553D0F58CA75E576F71029 /* Pods_ToDoApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		33BE6DED29532E1300F1C43D /* ToDoListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListScreen.swift; sourceTree = "<group>"; };
 		33CC93482955676C0023E7E6 /* AddItemScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemScreen.swift; sourceTree = "<group>"; };
 		33DD26692980033500E5A01D /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
+		33F54CA729815B1F00E7505A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C553D0F58CA75E576F71029 /* Pods_ToDoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3792D8A9E7EE2E358B39E7 /* Pods-ToDoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoApp.debug.xcconfig"; path = "Target Support Files/Pods-ToDoApp/Pods-ToDoApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -290,6 +292,7 @@
 				33B29ABE29640007004DDC29 /* Resources */,
 				33BE6DDC29532BCC00F1C43D /* Assets.xcassets */,
 				33BE6DDE29532BCC00F1C43D /* Preview Content */,
+				33F54CA729815B1F00E7505A /* AppDelegate.swift */,
 			);
 			path = ToDoApp;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				334E827629546C3D006CF31E /* UserModel.swift in Sources */,
 				331E9ECD295413E80023DA7D /* TextView.swift in Sources */,
 				33DD266A2980033500E5A01D /* Env.swift in Sources */,
+				33F54CA829815B1F00E7505A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
