@@ -18,37 +18,40 @@ struct LogInScreen: View {
     @State private var alertText: String = ""
     
     var body: some View {
-        ZStack {
-            VStack {
-                Spacer()
-                
-                LogoAndTitleView()
-                
-                VStack(alignment: .leading) {
-                    TextView(title: "Name:")
+        ScrollView {
+            ZStack {
+                VStack {
+                    Spacer()
                     
-                    TextFieldView(bindValue: $name, title: "Enter your full name")
+                    LogoAndTitleView()
                     
-                    TextView(title: "Email:")
-                    
-                    TextFieldView(bindValue: $email, title: "Enter your email")
-                    
-                    CustomButtonView(title: "Log In", action: logInAction)
-                    
-                    CustomButtonView(title: "Sign Up", background: .green, action: signUpAction)
+                    VStack(alignment: .leading) {
+                        TextView(title: "Name:")
+                        
+                        TextFieldView(bindValue: $name, title: "Enter your full name")
+                        
+                        TextView(title: "Email:")
+                        
+                        TextFieldView(bindValue: $email, title: "Enter your email")
+                        
+                        CustomButtonView(title: "Log In", action: logInAction)
+                        
+                        CustomButtonView(title: "Sign Up", background: .green, action: signUpAction)
+                    }
+                    MultiSpacer(count: 3)
                 }
-                MultiSpacer(count: 3)
-            }
-            .ignoresSafeArea(.keyboard)
-            .alert("\(alertText)", isPresented: $showAlert, actions: {})
-            .padding(30)
-            
-            if showProgressView {
-                Color.white.opacity(0.2)
-                    .ignoresSafeArea()
-                ProgressView()
+                .ignoresSafeArea(.keyboard)
+                .alert("\(alertText)", isPresented: $showAlert, actions: {})
+                .padding(30)
+                
+                if showProgressView {
+                    Color.white.opacity(0.2)
+                        .ignoresSafeArea()
+                    ProgressView()
+                }
             }
         }
+        .scrollIndicators(.hidden)
     }
 
     private func signUpAction() {

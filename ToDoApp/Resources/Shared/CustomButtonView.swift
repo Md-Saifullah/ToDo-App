@@ -22,7 +22,7 @@ struct CustomButtonView: View {
         Button(action: action) {
             TextView(title: title)
                 .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: 55)
+                .frame(maxWidth: .infinity, minHeight: 55, maxHeight: 55)
                 .background(background)
                 .cornerRadius(10)
         }
