@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct ToDoAppApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var userViewModel: UserViewModel = .init()
 
     var body: some Scene {
