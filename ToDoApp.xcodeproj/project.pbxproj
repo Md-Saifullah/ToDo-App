@@ -155,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				337EE62F2955A9A3004231C6 /* HomeScreen.swift */,
+				33B29AB72963FE3A004DDC29 /* EmptyListScreen */,
 				33B29AB42963FCC7004DDC29 /* ToDoListScreen */,
 				33B29AB22963FC9A004DDC29 /* ProfileScreen */,
 			);
@@ -236,7 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				33BE6DED29532E1300F1C43D /* ToDoListScreen.swift */,
-				33B29AB72963FE3A004DDC29 /* EmptyListScreen */,
 				334E82702954354E006CF31E /* ToDoListRowView */,
 				33B29AB82963FE52004DDC29 /* EditItemScreen */,
 				33B29ABB2963FEBA004DDC29 /* AddItemScreen */,
