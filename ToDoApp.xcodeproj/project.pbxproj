@@ -49,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		019593DD29D7A63C000F9E09 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = SOURCE_ROOT; };
 		2AFB5A8A218303122F513C8C /* Pods-ToDoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoApp.release.xcconfig"; path = "Target Support Files/Pods-ToDoApp/Pods-ToDoApp.release.xcconfig"; sourceTree = "<group>"; };
 		3316A14B295AB98500E3F7BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		331E9ECC295413E80023DA7D /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		33F54CAF29815C5100E7505A /* ToDoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoAppUITests.swift; sourceTree = "<group>"; };
 		33F54CB129815C5100E7505A /* ToDoAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		33F54CB82981613D00E7505A /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "AppStartScreen/LogInScreen/Launch Screen.storyboard"; sourceTree = "<group>"; };
-		3B44DB7A2998D3E30096D6BC /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		3C553D0F58CA75E576F71029 /* Pods_ToDoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3792D8A9E7EE2E358B39E7 /* Pods-ToDoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoApp.debug.xcconfig"; path = "Target Support Files/Pods-ToDoApp/Pods-ToDoApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -349,7 +349,7 @@
 		3B44DB792998D3C50096D6BC /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				3B44DB7A2998D3E30096D6BC /* Config.xcconfig */,
+				019593DD29D7A63C000F9E09 /* Config.xcconfig */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -555,7 +555,6 @@
 /* Begin XCBuildConfiguration section */
 		33BE6DE129532BCC00F1C43D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B44DB7A2998D3E30096D6BC /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -616,7 +615,6 @@
 		};
 		33BE6DE229532BCC00F1C43D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B44DB7A2998D3E30096D6BC /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
